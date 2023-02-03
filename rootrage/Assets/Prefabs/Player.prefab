@@ -156,7 +156,7 @@ MonoBehaviour:
   airDeceleration: 1
   weight: 45
   jumpLength: 0.5
-  jumpForce: 200
+  jumpForce: 20
   jumpCutOff: 0.5
   coyoteTime: 0.125
   maxFallSpeed: 20

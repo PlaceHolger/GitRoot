@@ -19,6 +19,8 @@ public class PlayerInput : MonoBehaviour
         moveAction.asset.Enable();
         jumpAction.asset.Enable();
         sprintAction.asset.Enable();
+        jumpAction.action.performed += JumpInputPerformed;
+        jumpAction.action.canceled += JumpInputCanceled;
     }
 
     private void Update()
