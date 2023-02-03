@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,58 +5,41 @@ public class PlayerInput : MonoBehaviour
 {
     [Header("Inputs")]
     public InputActionReference moveAction;
-    [Header("Horizontal movement")] public float movementSpeed = 8f;
-    private Vector3 _horizontalVelocity;
-
+    public InputActionReference jumpAction;
+    public InputActionReference sprintAction;
 
     private Vector2 _rawInput;
-    private float _previousInputMagnitude = 0.0f;
-    private float _currentSpeed;
-    private Vector3 _previousInputVector;
-    public float acceleration = 2f;
-    public float deceleration = 8f;
-    public float rotationSpeed = 4f;
-
-    private Rigidbody _rigidbody;
-
-    void Awake()
+    private Move _characterController;
+    //private Transform _cameraTransform;
+    
+    private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _characterController = GetComponent<Move>();
+        //_cameraTransform = FindObjectOfType<Camera>().transform;
+        moveAction.asset.Enable();
+        jumpAction.asset.Enable();
+        sprintAction.asset.Enable();
     }
 
-    void Start()
+    private void Update()
     {
-        moveAction.action.Enable();
-    }
-
-    void Update()
-    {
+        // Move
         _rawInput = moveAction.action.ReadValue<Vector2>();
-        Vector3 MoveInput = new Vector3(_rawInput.x, 0.0f, _rawInput.y);
+        Vector3 forward = Vector3.forward; //new Vector3( _cameraTransform.forward.x, 0, _cameraTransform.forward.z ).normalized;
+        Vector3 right = Vector3.right; // new Vector3( _cameraTransform.right.x, 0, _cameraTransform.right.z ).normalized;
+        _characterController.MoveInput = right * _rawInput.x + forward * _rawInput.y;
+        
+        // Sprint
+        _characterController.IsSprinting = sprintAction.action.IsPressed();
+    }
 
-        float inputMagnitude = _rawInput.magnitude;
+    private void JumpInputPerformed(InputAction.CallbackContext context)
+    {
+        _characterController.TryJump();
+    }
 
-        float inputAcceleration = inputMagnitude > _previousInputMagnitude
-            ? acceleration
-            : deceleration;
-
-        Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, MoveInput, Time.deltaTime * inputAcceleration);
-        float lerpedMagnitude = lerpedInputVector.magnitude;
-
-        _currentSpeed = movementSpeed;
-        _horizontalVelocity = lerpedInputVector * _currentSpeed;
-
-        // Caching for next frame
-        _previousInputMagnitude = lerpedMagnitude;
-        _previousInputVector = lerpedInputVector;
-
-        // Apply both components to find final frame velocity
-        _rigidbody.velocity = _horizontalVelocity;
-
-        if (inputMagnitude > 0f)
-        {
-            Quaternion newRotation = Quaternion.LookRotation(MoveInput);
-            transform.rotation = Quaternion.Lerp(_rigidbody.rotation, newRotation, Time.deltaTime * rotationSpeed);
-        }
+    private void JumpInputCanceled(InputAction.CallbackContext context)
+    {
+        _characterController.InterruptJump();
     }
 }

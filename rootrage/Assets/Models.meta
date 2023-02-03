@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 22f9e14850a07d144831789c4ad3acce
+=======
+guid: 4eddefea24442584c8ec32b700222e89
+>>>>>>> 5f20784 (created player prefab)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
