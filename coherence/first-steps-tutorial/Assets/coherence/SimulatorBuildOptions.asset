@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: SimulatorBuildOptions
   m_EditorClassIdentifier: 
   scenesToBuild:
-  - {fileID: 102900000, guid: 6b2caef389e13424e9f0ccef9b308234, type: 3}
-  - {fileID: 102900000, guid: d4ad44ae023034118ae270d6e04942ed, type: 3}
+  - {fileID: 102900000, guid: e15b64d7526934560a0a8d00c727db0c, type: 3}
+  - {fileID: 102900000, guid: 0a12b974e546c4cbcb834f1f55f83912, type: 3}
+  - {fileID: 102900000, guid: 5b0089e2e7ee0432e98682912fd6de2b, type: 3}
+  - {fileID: 102900000, guid: dacfadd59f33045fca1238d6fe545870, type: 3}
+  - {fileID: 102900000, guid: c45a4163162034dda8ba5af9ca01d3c4, type: 3}
+  - {fileID: 102900000, guid: 8f6265575418e48f3bdbdd5bc46dab46, type: 3}
+  - {fileID: 102900000, guid: 6e266a2975dea4d9fab03452c2cd8ff1, type: 3}
   headlessMode: 1
   scriptingImplementation: 0
   developmentBuild: 0

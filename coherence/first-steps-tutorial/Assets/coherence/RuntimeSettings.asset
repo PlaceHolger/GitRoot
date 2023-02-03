@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   versionInfo: {fileID: 11400000, guid: 2191b6f902c97477baa32a7919010503, type: 2}
   runtimeKey: 5021bbdc9f7b4b9f875c41b9ecf5262b
-  schemaID: 3e213965a39f73100728eab1ecc4353442de468d
-  simulatorSlug: 
+  schemaID: 489224ac8eb57729e4503c7d95aecbfb0149e9c4
+  simulatorSlug: Slugistan
   localHost: 127.0.0.1
   localWorldUDPPort: 32001
   localWorldWebPort: 32002
@@ -26,7 +26,7 @@ MonoBehaviour:
   worldsAPIPort: 64002
   localHttpServerHost: localhost
   localHttpServerPort: 42006
-  localDevelopmentMode: 1
+  localDevelopmentMode: 0
   useDebugStreams: 0
   organizationID: cfeipttbo1hpmarb3sp0
   projectID: cfeipttbo1hpmarb3spg

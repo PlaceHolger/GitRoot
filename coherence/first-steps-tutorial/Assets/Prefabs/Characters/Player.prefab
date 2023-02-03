@@ -5724,7 +5724,8 @@ MonoBehaviour:
           sharedBinding: {fileID: 0}
         unityComponent: {fileID: 4666490834533792130}
         coherenceSync: {fileID: 0}
-        interpolationSettings: {fileID: 0}
+        interpolationSettings: {fileID: 11400000, guid: ae4419d1d9a8643709bf5f6b90c584a5,
+          type: 2}
     - rid: 2368829912872124502
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
@@ -5922,7 +5923,8 @@ MonoBehaviour:
           sharedBinding: {fileID: 0}
         unityComponent: {fileID: 4666490834533792130}
         coherenceSync: {fileID: 0}
-        interpolationSettings: {fileID: 0}
+        interpolationSettings: {fileID: 11400000, guid: ae4419d1d9a8643709bf5f6b90c584a5,
+          type: 2}
     - rid: 2368830094440660995
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
