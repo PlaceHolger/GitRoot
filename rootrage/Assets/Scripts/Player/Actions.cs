@@ -81,7 +81,7 @@ public class Actions : MonoBehaviour
         _rigidbody.velocity = _horizontalVelocity + _verticalVelocity;
         if (!_isGrounded) _verticalVelocity = Vector3.Project(_rigidbody.velocity, Vector3.up);
 
-        if (inputMagnitude > 0f)
+        if (inputMagnitude > 0f && !_isShooting)
         {
             Quaternion newRotation = Quaternion.LookRotation(MoveInput);
             transform.rotation = Quaternion.Lerp(_rigidbody.rotation, newRotation, Time.deltaTime * rotationSpeed);
