@@ -568,128 +568,6 @@ Transform:
   m_Father: {fileID: 4958357701502399473}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2468294152368646518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2468294152368646525}
-  - component: {fileID: 2468294152368646522}
-  - component: {fileID: 2468294152368646523}
-  - component: {fileID: 2468294152368646520}
-  - component: {fileID: 2468294152368646521}
-  m_Layer: 0
-  m_Name: Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2468294152368646525
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468294152368646518}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.444}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5423902492273474667}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2468294152368646522
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468294152368646518}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2468294152368646523
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468294152368646518}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2468294152368646520
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468294152368646518}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2468294152368646521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468294152368646518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6d95ebaec232f40a6d9623f1fd508d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootPrefab: {fileID: 8330739102840963238, guid: ee25081abcbe05b4cb3ff1991716cf96,
-    type: 3}
-  delayRootParts: 111
-  maxLength: 20
-  attackCheckSize: 0.666
-  attackCheckRange: 1.5
-  layermask:
-    serializedVersion: 2
-    m_Bits: 384
-  enableAttackLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &2490045232513161917
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +768,7 @@ Transform:
   - {fileID: 7580587394943799334}
   - {fileID: 5400465009389206637}
   m_Father: {fileID: 5423902492273474667}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8165674636091753135
 Animator:
@@ -1570,7 +1448,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2468294152368646525}
   - {fileID: 3171393229110447447}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1654,7 +1531,7 @@ CapsuleCollider:
   m_Radius: 0.6
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &5423902492273474671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,7 +1620,7 @@ MonoBehaviour:
   OnShootButtonEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2468294152368646521}
+      - m_Target: {fileID: 2468294152735019285}
         m_TargetAssemblyTypeName: RootCreator, Assembly-CSharp
         m_MethodName: ShootForward
         m_Mode: 1
@@ -1758,7 +1635,7 @@ MonoBehaviour:
   OnShootButtonReleasedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2468294152368646521}
+      - m_Target: {fileID: 2468294152735019285}
         m_TargetAssemblyTypeName: RootCreator, Assembly-CSharp
         m_MethodName: StopShoot
         m_Mode: 1
@@ -1834,16 +1711,6 @@ MonoBehaviour:
     - component: {fileID: 2468294152735019285}
       lodStepsActive: 1
     - component: {fileID: 8328851276966882265}
-      lodStepsActive: 1
-    - component: {fileID: 2468294152368646525}
-      lodStepsActive: 1
-    - component: {fileID: 2468294152368646522}
-      lodStepsActive: 1
-    - component: {fileID: 2468294152368646523}
-      lodStepsActive: 1
-    - component: {fileID: 2468294152368646520}
-      lodStepsActive: 1
-    - component: {fileID: 2468294152368646521}
       lodStepsActive: 1
     - component: {fileID: 3171393229110447447}
       lodStepsActive: 1
@@ -1990,7 +1857,7 @@ MonoBehaviour:
     lodLevels:
     - distance: 0
     archetypeName: BasePlayer_a9d1c005f5a6b1640951f13672eb472d
-    GeneratesArchetypeDefinition: 0
+    GeneratesArchetypeDefinition: 1
   InterpolationLocation: 1
   bakedScriptType: Coherence.Generated.CoherenceSyncBasePlayer_id0, Assembly-CSharp
   approveAuthorityTransferRequests: 1
