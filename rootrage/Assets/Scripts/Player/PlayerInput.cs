@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
@@ -8,6 +10,9 @@ public class PlayerInput : MonoBehaviour
     public InputActionReference jumpAction;
     public InputActionReference sprintAction;
 
+    public bool allowJump = true;
+    public UnityEvent OnJumpButtonEvent;
+    
     private Vector2 _rawInput;
     private Move _characterController;
     //private Transform _cameraTransform;
@@ -37,7 +42,9 @@ public class PlayerInput : MonoBehaviour
 
     private void JumpInputPerformed(InputAction.CallbackContext context)
     {
-        _characterController.TryJump();
+        OnJumpButtonEvent.Invoke();
+        if(allowJump)
+            _characterController.TryJump();
     }
 
     private void JumpInputCanceled(InputAction.CallbackContext context)

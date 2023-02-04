@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class DummyGroundCreator : MonoBehaviour
@@ -11,7 +12,12 @@ public class DummyGroundCreator : MonoBehaviour
     [SerializeField] private float DistanceBetweenSquares = 1;
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
+    {
+        CreatePlayfield();
+    }
+
+    public void CreatePlayfield()
     {
         for (int x = 0; x < Width; x++)
         {
@@ -19,7 +25,19 @@ public class DummyGroundCreator : MonoBehaviour
             {
                 var ground = Instantiate(GroundPrefab, transform);
                 ground.transform.position = new Vector3((transform.position.x + x - (Width * 0.5f)) * DistanceBetweenSquares, 0, (transform.position.z + y - (Height * 0.5f)) * DistanceBetweenSquares);
-            }            
+            }
         }
+    }
+}
+
+[CustomEditor(typeof(DummyGroundCreator))]   //The script which you want to button to appear in
+public class DummyGroundCreatorInspectorScript : Editor {
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector ();    //This goes first
+
+        var scriptReference = (DummyGroundCreator)target;
+        if (GUILayout.Button("Create"))
+            scriptReference.CreatePlayfield();
     }
 }
