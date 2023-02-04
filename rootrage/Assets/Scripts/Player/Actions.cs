@@ -139,8 +139,11 @@ public class Actions : MonoBehaviour
 
     public void InterruptShoot()
     {
-        _isShooting = false;
-        animator.SetBool("isShooting", false);
+        if (_isShooting)
+        {
+            _isShooting = false;
+            animator.SetBool("isShooting", false);
+        }        
     }
 
     private void Shoot()
