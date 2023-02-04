@@ -60,3 +60,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+fish-net/Library/
+fish-net/Logs/
+fish-net/obj/
+fish-net/BUILDS/
