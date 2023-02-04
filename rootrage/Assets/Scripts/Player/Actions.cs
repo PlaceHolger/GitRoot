@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Actions : MonoBehaviour
 {
-    //public Animator animator;
+    public Animator animator;
 
     [field: Header("Inputs")] public Vector3 MoveInput { get; set; }
 
@@ -34,6 +34,7 @@ public class Actions : MonoBehaviour
     private float _previousInputMagnitude;
     private float _timeSinceGrounded = 0;
     private bool _isFalling = true;
+    private bool _isShooting = false;
 
     private void Awake()
     {
@@ -65,7 +66,7 @@ public class Actions : MonoBehaviour
         Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, MoveInput, Time.deltaTime * inputAcceleration);
         float lerpedMagnitude = lerpedInputVector.magnitude;
 
-        _currentSpeed = movementSpeed;
+        _currentSpeed = _isShooting ? 0 : movementSpeed;
         _horizontalVelocity = lerpedInputVector * _currentSpeed;
 
         // Caching for next frame
@@ -80,7 +81,7 @@ public class Actions : MonoBehaviour
         _rigidbody.velocity = _horizontalVelocity + _verticalVelocity;
         if (!_isGrounded) _verticalVelocity = Vector3.Project(_rigidbody.velocity, Vector3.up);
 
-        if (inputMagnitude > 0f)
+        if (inputMagnitude > 0f && !_isShooting)
         {
             Quaternion newRotation = Quaternion.LookRotation(MoveInput);
             transform.rotation = Quaternion.Lerp(_rigidbody.rotation, newRotation, Time.deltaTime * rotationSpeed);
@@ -111,8 +112,7 @@ public class Actions : MonoBehaviour
         // This is used to blend between the Walk and Run animation clips in the Animator
         float animationSpeed = _horizontalVelocity.magnitude / _currentSpeed;
 
-        //animator.SetFloat("MoveSpeed", animationSpeed);
-        //animator.SetBool("Grounded", _isGrounded);
+        animator.SetFloat("MoveSpeed", animationSpeed);
     }
 
     private void ApplyGravity()
@@ -124,17 +124,22 @@ public class Actions : MonoBehaviour
     public void TryShoot()
     {
         bool canShoot = true; //TODO add logic
-        if (canShoot) Shoot();
+        if (canShoot) {
+            _isShooting = true;
+            animator.SetBool("isShooting", true);
+            Shoot();
+        }
     }
 
     public void InterruptShoot()
     {
-        //TODO add logic
+        _isShooting = false;
+        animator.SetBool("isShooting", false);
     }
 
     private void Shoot()
     {
-        //animator.SetTrigger("Shoot");
+        animator.SetTrigger("Shoot");
         //_sync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Shoot");
     }
 

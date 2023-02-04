@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool allowShoot = true;
     public UnityEvent OnShootButtonEvent;
+    public UnityEvent OnShootButtonReleasedEvent;
     
     private Vector2 _rawInput;
     private Actions _characterController;
@@ -44,6 +45,7 @@ public class PlayerInput : MonoBehaviour
 
     private void ShootInputCanceled(InputAction.CallbackContext context)
     {
+        OnShootButtonReleasedEvent.Invoke();
         _characterController.InterruptShoot();
     }
 }
