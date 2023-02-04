@@ -7,11 +7,10 @@ public class PlayerInput : MonoBehaviour
 {
     [Header("Inputs")]
     public InputActionReference moveAction;
-    public InputActionReference jumpAction;
-    public InputActionReference sprintAction;
+    public InputActionReference shootAction;
 
-    public bool allowJump = true;
-    public UnityEvent OnJumpButtonEvent;
+    public bool allowShoot = true;
+    public UnityEvent OnShootButtonEvent;
     
     private Vector2 _rawInput;
     private Move _characterController;
@@ -22,10 +21,9 @@ public class PlayerInput : MonoBehaviour
         _characterController = GetComponent<Move>();
         //_cameraTransform = FindObjectOfType<Camera>().transform;
         moveAction.asset.Enable();
-        jumpAction.asset.Enable();
-        sprintAction.asset.Enable();
-        jumpAction.action.performed += JumpInputPerformed;
-        jumpAction.action.canceled += JumpInputCanceled;
+        shootAction.asset.Enable();
+        shootAction.action.performed += ShootInputPerformed;
+        shootAction.action.canceled += ShootInputCanceled;
     }
 
     private void Update()
@@ -35,20 +33,17 @@ public class PlayerInput : MonoBehaviour
         Vector3 forward = Vector3.forward; //new Vector3( _cameraTransform.forward.x, 0, _cameraTransform.forward.z ).normalized;
         Vector3 right = Vector3.right; // new Vector3( _cameraTransform.right.x, 0, _cameraTransform.right.z ).normalized;
         _characterController.MoveInput = right * _rawInput.x + forward * _rawInput.y;
-        
-        // Sprint
-        _characterController.IsSprinting = sprintAction.action.IsPressed();
     }
 
-    private void JumpInputPerformed(InputAction.CallbackContext context)
+    private void ShootInputPerformed(InputAction.CallbackContext context)
     {
-        OnJumpButtonEvent.Invoke();
-        if(allowJump)
-            _characterController.TryJump();
+        OnShootButtonEvent.Invoke();
+        if(allowShoot)
+            _characterController.TryShoot();
     }
 
-    private void JumpInputCanceled(InputAction.CallbackContext context)
+    private void ShootInputCanceled(InputAction.CallbackContext context)
     {
-        _characterController.InterruptJump();
+        _characterController.InterruptShoot();
     }
 }
