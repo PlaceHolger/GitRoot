@@ -34,6 +34,7 @@ public class Actions : MonoBehaviour
     private float _previousInputMagnitude;
     private float _timeSinceGrounded = 0;
     private bool _isFalling = true;
+    private bool _isShooting = false;
 
     private void Awake()
     {
@@ -65,7 +66,7 @@ public class Actions : MonoBehaviour
         Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, MoveInput, Time.deltaTime * inputAcceleration);
         float lerpedMagnitude = lerpedInputVector.magnitude;
 
-        _currentSpeed = movementSpeed;
+        _currentSpeed = _isShooting ? 0 : movementSpeed;
         _horizontalVelocity = lerpedInputVector * _currentSpeed;
 
         // Caching for next frame
@@ -124,12 +125,15 @@ public class Actions : MonoBehaviour
     public void TryShoot()
     {
         bool canShoot = true; //TODO add logic
-        if (canShoot) Shoot();
+        if (canShoot) {
+            _isShooting = true;
+            Shoot();
+        }
     }
 
     public void InterruptShoot()
     {
-        //TODO add logic
+        _isShooting = false;
     }
 
     private void Shoot()
