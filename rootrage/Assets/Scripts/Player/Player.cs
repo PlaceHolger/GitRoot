@@ -49,8 +49,13 @@ public class Player : MonoBehaviour
         return stats;
     }
 
-    public void Reset()
+    public void Reset(GameObject spawnpoint)
     {
+        if (spawnpoint)
+        {
+            transform.position = spawnpoint.transform.position;
+            transform.rotation = spawnpoint.transform.rotation;
+        }
         _collector.Reset();
         _actions.Reset();
     }

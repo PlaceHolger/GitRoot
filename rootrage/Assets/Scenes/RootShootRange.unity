@@ -56055,6 +56055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arena: {fileID: 60366272}
+  collectable: {fileID: 1639869890364846818, guid: 182c718b30d473f4588b3cc8823a2365,
+    type: 3}
   players:
   - {fileID: 1592833256}
   - {fileID: 1897928115}
