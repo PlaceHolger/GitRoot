@@ -19,7 +19,14 @@ public class RootCreator : MonoBehaviour
 
     Collider[] collisionResults = new Collider[16];
     private bool isShooting;
-    
+    private bool attackAnimReady;
+
+    public bool AttackAnimReady
+    {
+        get => attackAnimReady;
+        set => attackAnimReady = value;
+    }
+
     //Todo: particle in front, mesh in front different from rest, sound...
 
     public void StopShoot()
@@ -49,7 +56,6 @@ public class RootCreator : MonoBehaviour
         if (isShooting) //dont allow shooting, while shooting, duh
             return;
         
-        var rootParent = new GameObject("RootShoot");
         var startRot = transform.rotation;
         var startForward = transform.forward;
         var currentRootPos = transform.position;
@@ -79,8 +85,18 @@ public class RootCreator : MonoBehaviour
             EventAttackStart.Invoke();
             return;
         }
+        
+        
         isShooting = true;
+        while (!attackAnimReady)
+        {
+            if (!isShooting)
+                return;
+            await Task.Delay(5);
+        }
+        
         EventStartRooting.Invoke();
+        var rootParent = new GameObject("RootShoot");
         while (currentLength < maxLength && isShooting)
         {
             currentLength++;

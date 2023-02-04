@@ -776,7 +776,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Server: COHERENCE_SIMULATOR
-    Standalone: 
+    Standalone: FISHNET
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

@@ -57,11 +57,13 @@ public class ArenaManager: MonoBehaviour
 
     [SerializeField]
     private int arenaGridWidth = 16;
+    public int ArenaGridWidth { get { return arenaGridWidth; } }
 
     private int effectiveArenaGridWidth { get { return arenaGridWidth + (arenaGridBorder * 2); } }
 
     [SerializeField]
     private int arenaGridLength = 9;
+    public int ArenaGridLength { get { return arenaGridLength; } }
 
     private int effectiveArenaGridLength { get { return arenaGridLength + (arenaGridBorder * 2); } }
 
@@ -70,6 +72,7 @@ public class ArenaManager: MonoBehaviour
 
     [SerializeField, Range(0, 7)]
     private int arenaGridBorder = 2;
+    public int ArenaGridBorder { get { return arenaGridBorder; } }
 
     [SerializeField]
     private GameObject arenaEmptyGround;
