@@ -101836,14 +101836,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8480957349580284760, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: enableAttackLayerMask.m_Bits
+      value: 640
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}
---- !u!1 &1592833256 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1592833255}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1593496319
 GameObject:
   m_ObjectHideFlags: 0
@@ -115777,21 +115781,6 @@ Transform:
   m_Father: {fileID: 567032110}
   m_RootOrder: 797
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829769946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592833256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e07e6850f8d4b20438d0479523536489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitParticle: {fileID: 2188455054033026588, guid: b830cfa678d705a4084c819f8d510ad7,
-    type: 3}
-  HitFeedbackDuration: 0.3
 --- !u!1 &1830687188
 GameObject:
   m_ObjectHideFlags: 0
@@ -119920,29 +119909,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[5]
       value: 
       objectReference: {fileID: 2100000, guid: 375591f594835924994f4f879c019c6d, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 5897220099706365983, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957349580284760, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: obstacleLayermask.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: enableAttackLayerMask.m_Bits
+      value: 576
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}
---- !u!1 &1897928115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1897928114}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1897928126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897928115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e07e6850f8d4b20438d0479523536489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitParticle: {fileID: 2188455054033026588, guid: b830cfa678d705a4084c819f8d510ad7,
-    type: 3}
-  HitFeedbackDuration: 0.3
 --- !u!1 &1903173234
 GameObject:
   m_ObjectHideFlags: 0

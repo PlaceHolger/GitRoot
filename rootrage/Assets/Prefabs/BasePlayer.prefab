@@ -1429,6 +1429,7 @@ GameObject:
   - component: {fileID: 2468294152735019285}
   - component: {fileID: 8328851276966882265}
   - component: {fileID: 8819557813376852116}
+  - component: {fileID: 6904071320373833408}
   m_Layer: 0
   m_Name: BasePlayer
   m_TagString: Untagged
@@ -1595,7 +1596,7 @@ MonoBehaviour:
   maxLength: 20
   attackCheckSize: 0.666
   attackCheckRange: 1.5
-  layermask:
+  obstacleLayermask:
     serializedVersion: 2
     m_Bits: 384
   enableAttackLayerMask:
@@ -1854,6 +1855,8 @@ MonoBehaviour:
       lodStepsActive: 1
     - component: {fileID: 2114900994341941983}
       lodStepsActive: 1
+    - component: {fileID: 6904071320373833408}
+      lodStepsActive: 1
     lodLevels:
     - distance: 0
     archetypeName: BasePlayer_a9d1c005f5a6b1640951f13672eb472d
@@ -1990,6 +1993,22 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
+--- !u!114 &6904071320373833408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423902492273474663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07e6850f8d4b20438d0479523536489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitParticle: {fileID: 2188455054033026588, guid: b830cfa678d705a4084c819f8d510ad7,
+    type: 3}
+  animator: {fileID: 8165674636091753135}
+  HitFeedbackDuration: 0.222
 --- !u!1 &5770763419539567854
 GameObject:
   m_ObjectHideFlags: 0
