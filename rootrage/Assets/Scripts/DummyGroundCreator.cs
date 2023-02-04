@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class DummyGroundCreator : MonoBehaviour
@@ -30,6 +30,7 @@ public class DummyGroundCreator : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(DummyGroundCreator))]   //The script which you want to button to appear in
 public class DummyGroundCreatorInspectorScript : Editor {
     public override void OnInspectorGUI()
@@ -41,3 +42,4 @@ public class DummyGroundCreatorInspectorScript : Editor {
             scriptReference.CreatePlayfield();
     }
 }
+#endif
