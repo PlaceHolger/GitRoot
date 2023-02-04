@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Root
   - Collectable
+  - Wall
   layers:
   - Default
   - TransparentFX
