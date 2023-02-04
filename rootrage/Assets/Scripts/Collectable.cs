@@ -9,7 +9,7 @@ public class Collectable : MonoBehaviour
     
     public void OnCollect()
     {
-        transform.DOScale(Vector3.zero, pickupDelay);
-        Destroy(gameObject, pickupDelay + 0.25f);
+        transform.DOScale(Vector3.zero, pickupDelay).OnComplete(() => gameObject.SetActive(false));
+        Destroy(gameObject, pickupDelay + 0.666f);
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Actions : MonoBehaviour
 {
     public Animator animator;
-
+    public RootCreator rootCreator;
+    
     [field: Header("Inputs")] public Vector3 MoveInput { get; set; }
 
     [Header("Horizontal movement")] public float movementSpeed = 8f;
@@ -81,7 +82,7 @@ public class Actions : MonoBehaviour
         _rigidbody.velocity = _horizontalVelocity + _verticalVelocity;
         if (!_isGrounded) _verticalVelocity = Vector3.Project(_rigidbody.velocity, Vector3.up);
 
-        if (inputMagnitude > 0f && !_isShooting)
+        if (inputMagnitude > 0f /*&& !_isShooting*/)
         {
             Quaternion newRotation = Quaternion.LookRotation(MoveInput);
             transform.rotation = Quaternion.Lerp(_rigidbody.rotation, newRotation, Time.deltaTime * rotationSpeed);
@@ -123,11 +124,16 @@ public class Actions : MonoBehaviour
 
     public void TryShoot()
     {
-        bool canShoot = true; //TODO add logic
-        if (canShoot) {
+        bool isSomethingInMeleeRange = rootCreator.IsSomethingInMeleeRange();
+        if (!isSomethingInMeleeRange) 
+        {
             _isShooting = true;
             animator.SetBool("isShooting", true);
             Shoot();
+        }
+        else
+        {
+            animator.SetTrigger("Attack");
         }
     }
 

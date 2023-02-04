@@ -7,10 +7,10 @@ public class PlayerCollector : MonoBehaviour
 {
     private int currentScore;
     public LayerMask collectablesMask = 1 << 10;
-    public SphereCollider checkCollider;
+    public float collectRadius = 1;
     private void FixedUpdate()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, checkCollider.radius, collectablesMask, QueryTriggerInteraction.Collide);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, collectRadius, collectablesMask, QueryTriggerInteraction.Collide);
         foreach (var hitCollectable in hitColliders)
         {
             var collectableComp = hitCollectable.transform.GetComponent<Collectable>();

@@ -15,8 +15,8 @@ public class Root : MonoBehaviour
         if (hitPoints-- <= 0)
         {
             EventOnDestroy.Invoke();
-            transform.DOScale(Vector3.zero, destroyDelay);
-            Destroy(gameObject, destroyDelay + 0.25f);
+            transform.DOScale(Vector3.zero, destroyDelay).OnComplete(() => gameObject.SetActive(false));;
+            Destroy(gameObject, destroyDelay + 0.666f);
         }
         else EventOnHit.Invoke();
     }
