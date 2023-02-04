@@ -48,7 +48,7 @@ MonoBehaviour:
   arenaGridWidth: 14
   arenaGridLength: 10
   arenaGridCellSize: 1
-  arenaGridBorder: 2
+  arenaGridBorder: 7
   arenaEmptyGround: {fileID: 919132149155446097, guid: 8b95901cb735d7c4290ee000854e9964,
     type: 3}
   arenaSpawnPoint: {fileID: 7674483178572013528, guid: 39bf5ef7154e1404a81decab76a88d78,
@@ -58,3 +58,4 @@ MonoBehaviour:
   - {fileID: 61157153852137624, guid: b87ca8c8315286a43807508b13056f2a, type: 3}
   - {fileID: 907301397233466950, guid: ac2ba5c1884a0dc4aa40163641aa70b9, type: 3}
   - {fileID: 9162400309117918852, guid: cdab44d79e89db34ab6b932171c26217, type: 3}
+  decorationTreePrefabs: []

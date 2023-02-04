@@ -68,7 +68,7 @@ public class ArenaManager: MonoBehaviour
     [SerializeField, Range(0.1f, 3f)]
     private float arenaGridCellSize = 1.0f;
 
-    [SerializeField, Range(0, 4)]
+    [SerializeField, Range(0, 7)]
     private int arenaGridBorder = 2;
 
     [SerializeField]
@@ -80,9 +80,13 @@ public class ArenaManager: MonoBehaviour
     [SerializeField, Tooltip("Order: Top Left, Top Right, Bottom Left, Bottom Right, Straight, Empty")]
     private List<GameObject> arenaBorderPrefabs;
 
+    [SerializeField]
+    private List<GameObject> decorationTreePrefabs;
+
     private List<GameObject> borderElements = new List<GameObject>();
 
     private List<GameObject> spawnPoints = new List<GameObject>();
+    public List<GameObject> ArenaSpawnPoints { get { return spawnPoints; } }
 
     private Dictionary<int, ArenaGridElement> arenaGridElements = new Dictionary<int, ArenaGridElement>();
 
@@ -131,7 +135,7 @@ public class ArenaManager: MonoBehaviour
             {
                 for ( int j = arenaObstacle.y; j < arenaObstacle.y + arenaObstacle.width; j++)
                 {
-                    arenaGridContent.content[IndexAt(i, j)] = ArenaGridContentInformation.Obstacle;
+                    arenaGridContent.content[IndexAt(i + arenaGridBorder, j + arenaGridBorder)] = ArenaGridContentInformation.Obstacle;
                 }
             }
         }
@@ -139,66 +143,13 @@ public class ArenaManager: MonoBehaviour
         foreach ( ArenaSpawnPoints spawnPoint in arenaDefinition.spawnPoints )
         {
             GameObject spawnPointObject = Instantiate(arenaSpawnPoint, transform);
-            spawnPointObject.transform.localPosition = new Vector3(spawnPoint.x, 0, spawnPoint.y);
+            spawnPointObject.transform.localPosition = new Vector3(spawnPoint.x + arenaGridBorder, 0, spawnPoint.y + arenaGridBorder);
             spawnPoints.Add(spawnPointObject);
         }
-
-        /*
-        // 2,3 2,4 obstacle
-        arenaGridContent.content[IndexAt(2, 4)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(2, 5)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(2, 6)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(3, 4)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(3, 5)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(3, 6)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(4, 4)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(4, 5)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(4, 6)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(4, 7)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(4, 8)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(5, 4)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(5, 5)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(5, 6)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(5, 7)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(5, 8)] = ArenaGridContentInformation.Obstacle;
-
-        arenaGridContent.content[IndexAt(7, 8)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(7, 9)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(7, 10)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(8, 7)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(8, 8)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(8, 9)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(8, 10)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(8, 11)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(9, 7)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(9, 8)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(9, 9)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(9, 10)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(9, 11)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(10, 8)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(10, 9)] = ArenaGridContentInformation.Obstacle;
-        arenaGridContent.content[IndexAt(10, 10)] = ArenaGridContentInformation.Obstacle;
-        */
-
 
         foreach ( var contentInformation in arenaGridContent.content )
         {
             GameObject cellContent;
-
-            /*
-            switch (contentInformation.Value)
-            {
-                case ArenaGridContentInformation.Ground:
-                    cellContent = arenaEmptyGround;
-                    break;
-                case ArenaGridContentInformation.Obstacle:
-                    cellContent = arenaBorderPrefabs[0];
-                    break;
-                default:
-                    cellContent = null;
-                    break;
-            }
-            */
 
             (GameObject go, Quaternion quat, int cf) classification = ClassifyToCellPrefab(contentInformation.Key);
 
@@ -222,57 +173,13 @@ public class ArenaManager: MonoBehaviour
         }
 
         /*
-        for ( int i = -1; i < arenaGridWidth + 1; i++ )
+        for ( int i = - arenaGridBorder + 1; i < arenaGridBorder; i++ )
         {
-            for ( int j = -1; j < arenaGridLength + 1; j++ )
+            for ( int j = -arenaGridBorder + 1; j < arenaGridBorder; j++ )
             {
-                ArenaGridElement arenaGridElement = new ArenaGridElement();
-                arenaGridElements[IndexAt(i, j)] = arenaGridElement;
-
-                arenaGridElement.groundGameObject = Instantiate(arenaEmptyGround, transform);
-                arenaGridElement.groundGameObject.transform.localPosition = new Vector3(i, 0, j);
+                (int x, int y) decorationCoord = (i, j);
+                if (decorationCoord.x >= )
             }
-        }
-
-        Quaternion rotationQuaternion = Quaternion.identity;
-        Vector3 borderElementPosition;
-
-        for ( int i = 0; i < arenaGridWidth + 1; i++ )
-        {
-            borderElementPosition = new Vector3( i - 1, 0, -1 );
-            GameObject borderElement = i == 0 ? 
-                Instantiate(arenaBorderPrefabs[0], borderElementPosition, rotationQuaternion, transform) : 
-                Instantiate(arenaBorderPrefabs[1], borderElementPosition, rotationQuaternion, transform);
-        }
-
-        rotationQuaternion = Quaternion.AngleAxis(-90f, Vector3.up);
-
-        for ( int j = 0; j < arenaGridLength + 1; j++  )
-        {
-            borderElementPosition = new Vector3(arenaGridWidth, 0, j - 1);
-            GameObject borderElement = j == 0 ?
-                Instantiate(arenaBorderPrefabs[0], borderElementPosition, rotationQuaternion, transform) :
-                Instantiate(arenaBorderPrefabs[1], borderElementPosition, rotationQuaternion, transform);
-        }
-
-        rotationQuaternion = Quaternion.AngleAxis(180f, Vector3.up);
-
-        for (int i = arenaGridWidth + 1; i > 0; i--)
-        {
-            borderElementPosition = new Vector3(i - 1, 0, arenaGridLength);
-            GameObject borderElement = i == arenaGridWidth + 1 ?
-                Instantiate(arenaBorderPrefabs[0], borderElementPosition, rotationQuaternion, transform) :
-                Instantiate(arenaBorderPrefabs[1], borderElementPosition, rotationQuaternion, transform);
-        }
-
-        rotationQuaternion = Quaternion.AngleAxis(90f, Vector3.up);
-
-        for (int j = arenaGridLength + 1; j > 0; j--)
-        {
-            borderElementPosition = new Vector3(-1, 0, j - 1);
-            GameObject borderElement = j == arenaGridLength + 1 ?
-                Instantiate(arenaBorderPrefabs[0], borderElementPosition, rotationQuaternion, transform) :
-                Instantiate(arenaBorderPrefabs[1], borderElementPosition, rotationQuaternion, transform);
         }
         */
     }

@@ -65,7 +65,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8d95f9f9875798a4ab7566b6d756b79d,
         type: 3}
       propertyPath: m_Name
-      value: cliff_halfCornerInner_rock
+      value: cliff_halfCornerInner_rock Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d95f9f9875798a4ab7566b6d756b79d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d95f9f9875798a4ab7566b6d756b79d, type: 3}
@@ -75,19 +80,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8211476560931322038}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &5525314318286503397
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9021958810596328935}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 0.49999997, z: 0.41317266}
-  m_Center: {x: 0, y: 0.24999999, z: -0.2934136}
 --- !u!65 &4955954507068162619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101,3 +93,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.42954892, y: 0.49999997, z: 0.575851}
   m_Center: {x: -0.28522554, y: 0.24999999, z: 0.21207443}
+--- !u!65 &5525314318286503397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021958810596328935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.49999997, z: 0.41317266}
+  m_Center: {x: 0, y: 0.24999999, z: -0.2934136}
