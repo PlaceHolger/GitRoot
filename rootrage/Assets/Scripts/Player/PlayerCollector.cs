@@ -9,9 +9,9 @@ public class PlayerCollector : MonoBehaviour
     public LayerMask collectablesMask = 1 << 10;
     public float collectRadius = 1;
 
-    int CurrentScore
+    public int CurrentScore
     {
-        get { return currentScor; }
+        get { return currentScore; }
     }
 
     private void FixedUpdate()
