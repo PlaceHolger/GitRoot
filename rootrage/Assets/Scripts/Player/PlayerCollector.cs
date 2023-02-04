@@ -8,6 +8,12 @@ public class PlayerCollector : MonoBehaviour
     private int currentScore;
     public LayerMask collectablesMask = 1 << 10;
     public float collectRadius = 1;
+
+    int CurrentScore
+    {
+        get { return currentScor; }
+    }
+
     private void FixedUpdate()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, collectRadius, collectablesMask, QueryTriggerInteraction.Collide);
