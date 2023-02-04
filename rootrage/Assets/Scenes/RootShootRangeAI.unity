@@ -64307,6 +64307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252bbc2cccc21e94ba08f6f04768664a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
+  maxEnvironmentSteps: 5000
 --- !u!4 &994620593
 Transform:
   m_ObjectHideFlags: 0
@@ -75962,6 +75964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187936334}
   - component: {fileID: 1187936336}
+  - component: {fileID: 1187936337}
   m_Layer: 0
   m_Name: Sensors
   m_TagString: Untagged
@@ -75997,10 +76000,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: GridSensor
-  m_CellScale: {x: 1, y: 1, z: 1}
+  m_CellScale: {x: 1, y: 2, z: 1}
   m_GridSize: {x: 32, y: 1, z: 32}
-  m_RotateWithAgent: 1
-  m_AgentGameObject: {fileID: 1339388020}
+  m_RotateWithAgent: 0
+  m_AgentGameObject: {fileID: 1437750370}
   m_DetectableTags:
   - Player
   - Root
@@ -76020,6 +76023,21 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_CompressionType: 1
   m_ObservationStacks: 1
+--- !u!114 &1187936337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187936333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8012d5925524537b27131fef517017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: BufferSensor
+  m_ObservableSize: 6
+  m_MaxNumObservables: 4
 --- !u!1 &1188965486
 GameObject:
   m_ObjectHideFlags: 0
@@ -84967,7 +84985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339388021}
   - component: {fileID: 1339388024}
-  - component: {fileID: 1339388023}
+  - component: {fileID: 1339388025}
   - component: {fileID: 1339388022}
   m_Layer: 0
   m_Name: AI
@@ -85006,22 +85024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
---- !u!114 &1339388023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339388020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
 --- !u!114 &1339388024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85035,7 +85037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 0
+    VectorObservationSize: 2
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -85053,6 +85055,24 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
+--- !u!114 &1339388025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339388020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91382a3ad2cef64cbe1932b8b3fa9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 5000
+  otherPlayerBuffer: {fileID: 0}
+  locationNormalizationFactor: 32
 --- !u!1 &1339955937
 GameObject:
   m_ObjectHideFlags: 0
@@ -91216,6 +91236,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437668422}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1437750370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1592833255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1437750379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2069086436844582469, guid: f8b254a2942a441469aa656337a708f2,
@@ -102078,6 +102104,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}
@@ -120126,6 +120157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5897220099706365983, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: moveAction
@@ -120285,7 +120321,7 @@ MonoBehaviour:
   maxLength: 20
   attackCheckSize: 0.666
   attackCheckRange: 1.5
-  layermask:
+  obstacleLayermask:
     serializedVersion: 2
     m_Bits: 320
   enableAttackLayerMask:
