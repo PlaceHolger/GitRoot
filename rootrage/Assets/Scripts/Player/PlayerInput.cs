@@ -37,8 +37,11 @@ public class PlayerInput : MonoBehaviour
 
     private void ShootInputPerformed(InputAction.CallbackContext context)
     {
-        _characterController.TryShoot();
-        OnShootButtonEvent.Invoke();
+        if (!_characterController.IsStunned)
+        {
+            _characterController.TryShoot();
+            OnShootButtonEvent.Invoke();
+        }
     }
 
     private void ShootInputCanceled(InputAction.CallbackContext context)

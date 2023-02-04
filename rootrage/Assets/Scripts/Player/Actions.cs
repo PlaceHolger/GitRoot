@@ -36,7 +36,14 @@ public class Actions : MonoBehaviour
     private float _timeSinceGrounded = 0;
     private bool _isFalling = true;
     private bool _isShooting = false;
-
+    private bool _isStunned = false;
+    
+    public bool IsStunned
+    {
+        get => _isStunned;
+        set => _isStunned = value;
+    }
+    
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -67,7 +74,7 @@ public class Actions : MonoBehaviour
         Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, MoveInput, Time.deltaTime * inputAcceleration);
         float lerpedMagnitude = lerpedInputVector.magnitude;
 
-        _currentSpeed = _isShooting ? 0 : movementSpeed;
+        _currentSpeed = (_isShooting || _isStunned) ? 0 : movementSpeed;
         _horizontalVelocity = lerpedInputVector * _currentSpeed;
 
         // Caching for next frame
