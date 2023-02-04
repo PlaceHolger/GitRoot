@@ -78,8 +78,8 @@ public class RootCreator : MonoBehaviour
         {
             currentLength++;
             
-            startRot = Quaternion.Lerp(startRot, transform.rotation, 0.1f);
-            startForward = Vector3.Lerp(startForward, transform.forward, 0.05f);
+            startRot = Quaternion.Lerp(startRot, transform.rotation, 0.05f);
+            startForward = Vector3.Lerp(startForward, transform.forward, 0.04f);
             
             currentRootPos += startForward;
             hitCount = Physics.OverlapBoxNonAlloc(currentRootPos, Vector3.one * 0.45f, collisionResults, startRot, obstacleLayermask, QueryTriggerInteraction.Ignore);
@@ -111,7 +111,7 @@ public class RootCreator : MonoBehaviour
             if(isShooting)
             {
                 await Task.Delay((int)startDelay);
-                startDelay *= 0.9666f;
+                //startDelay *= 0.9666f;
             }
         }        
     }
