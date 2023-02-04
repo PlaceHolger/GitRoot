@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Events;
 
 public class RootCreator : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class RootCreator : MonoBehaviour
     [SerializeField] private float attackCheckRange = 2;
     [FormerlySerializedAs("layermask")] [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
     [SerializeField] private LayerMask enableAttackLayerMask = 1 << 9; //by default 'attackable'
+
+    [SerializeField] private UnityEvent EventStartRooting;
+    [SerializeField] private UnityEvent EventStopRooting;
+    [SerializeField] private UnityEvent EventAttackStart;
 
     Collider[] collisionResults = new Collider[16];
     private bool isShooting;
@@ -69,11 +74,13 @@ public class RootCreator : MonoBehaviour
                     if(playerComp)
                         playerComp.OnHit();
                 }
-                //TODO: Player attack handling
+               
             }
+            EventAttackStart.Invoke();
             return;
         }
         isShooting = true;
+        EventStartRooting.Invoke();
         while (currentLength < maxLength && isShooting)
         {
             currentLength++;
@@ -113,6 +120,7 @@ public class RootCreator : MonoBehaviour
                 await Task.Delay((int)startDelay);
                 //startDelay *= 0.9666f;
             }
-        }        
+        }
+        EventStopRooting.Invoke();
     }
 }
