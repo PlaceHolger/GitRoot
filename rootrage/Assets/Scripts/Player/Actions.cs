@@ -2,7 +2,7 @@
 //using Coherence.Toolkit;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class Actions : MonoBehaviour
 {
     //public Animator animator;
 
@@ -136,6 +136,10 @@ public class Move : MonoBehaviour
     {
         //animator.SetTrigger("Shoot");
         //_sync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Shoot");
+    }
 
+    public void ApplyActions(bool shoot, Vector2 moveDir) {
+        if (shoot) TryShoot();
+        MoveInput = Vector3.right * moveDir.x + Vector3.forward * moveDir.y;
     }
 }
