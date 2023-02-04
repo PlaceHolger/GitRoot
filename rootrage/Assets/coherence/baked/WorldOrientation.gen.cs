@@ -73,54 +73,6 @@ namespace Coherence.Generated
 			}
 			return (val, mask, null);
 		}
-		public static (WorldOrientation, uint, uint?) DeserializeArchetypeBasePlayer_a9d1c005f5a6b1640951f13672eb472d_WorldOrientation_LOD0(InProtocolBitStream bitStream)
-		{
-			var mask = (uint)0;
-			var val = new WorldOrientation();
-			if (bitStream.ReadMask())
-			{
-				val.value = (bitStream.ReadQuaternion(32)).ToUnityQuaternion();
-				mask |= 0b00000000000000000000000000000001;
-			}
-
-			return (val, mask, 0);
-		}
-		public static (WorldOrientation, uint, uint?) DeserializeArchetypeRoot_ee25081abcbe05b4cb3ff1991716cf96_WorldOrientation_LOD0(InProtocolBitStream bitStream)
-		{
-			var mask = (uint)0;
-			var val = new WorldOrientation();
-			if (bitStream.ReadMask())
-			{
-				val.value = (bitStream.ReadQuaternion(32)).ToUnityQuaternion();
-				mask |= 0b00000000000000000000000000000001;
-			}
-
-			return (val, mask, 0);
-		}
-		public static (WorldOrientation, uint, uint?) DeserializeArchetypePlayer_f8b254a2942a441469aa656337a708f2_WorldOrientation_LOD0(InProtocolBitStream bitStream)
-		{
-			var mask = (uint)0;
-			var val = new WorldOrientation();
-			if (bitStream.ReadMask())
-			{
-				val.value = (bitStream.ReadQuaternion(32)).ToUnityQuaternion();
-				mask |= 0b00000000000000000000000000000001;
-			}
-
-			return (val, mask, 0);
-		}
-		public static (WorldOrientation, uint, uint?) DeserializeArchetypeRoot2_a3292f8ac23adfe4db1a58ca67d68353_WorldOrientation_LOD0(InProtocolBitStream bitStream)
-		{
-			var mask = (uint)0;
-			var val = new WorldOrientation();
-			if (bitStream.ReadMask())
-			{
-				val.value = (bitStream.ReadQuaternion(32)).ToUnityQuaternion();
-				mask |= 0b00000000000000000000000000000001;
-			}
-
-			return (val, mask, 0);
-		}
 
 		/// <summary>
 		/// Resets byte array references to the local array instance that is kept in the lastSentData.
