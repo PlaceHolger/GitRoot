@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Actions : MonoBehaviour
 {
-    //public Animator animator;
+    public Animator animator;
 
     [field: Header("Inputs")] public Vector3 MoveInput { get; set; }
 
@@ -112,8 +112,7 @@ public class Actions : MonoBehaviour
         // This is used to blend between the Walk and Run animation clips in the Animator
         float animationSpeed = _horizontalVelocity.magnitude / _currentSpeed;
 
-        //animator.SetFloat("MoveSpeed", animationSpeed);
-        //animator.SetBool("Grounded", _isGrounded);
+        animator.SetFloat("MoveSpeed", animationSpeed);
     }
 
     private void ApplyGravity()
@@ -127,6 +126,7 @@ public class Actions : MonoBehaviour
         bool canShoot = true; //TODO add logic
         if (canShoot) {
             _isShooting = true;
+            animator.SetBool("isShooting", true);
             Shoot();
         }
     }
@@ -134,11 +134,12 @@ public class Actions : MonoBehaviour
     public void InterruptShoot()
     {
         _isShooting = false;
+        animator.SetBool("isShooting", false);
     }
 
     private void Shoot()
     {
-        //animator.SetTrigger("Shoot");
+        animator.SetTrigger("Shoot");
         //_sync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Shoot");
     }
 

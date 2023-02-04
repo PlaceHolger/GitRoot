@@ -1,49 +1,9 @@
 fileFormatVersion: 2
-guid: 4e206caf4bcac2d4bbc23209226d1147
+guid: 88b8eb4e562f96746988f939c4237c5c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Black
-    second: {fileID: 2100000, guid: 7357e920c27d4144f93ede2718948369, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Green01
-    second: {fileID: 2100000, guid: d5225a19a546ebf42af108b226c9da7e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Green02
-    second: {fileID: 2100000, guid: aa2d3b76b5ac12b4b9096bf1ea9eea03, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Green03
-    second: {fileID: 2100000, guid: 547e18c5515a0774faaf3cfd94310f3f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Grey
-    second: {fileID: 2100000, guid: a1da38f4ce834434cb8b225276be579a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_Player_Indicator
-    second: {fileID: 2100000, guid: 9bf3925b33df78f459f25efc016ecbc1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_axe_metal 2
-    second: {fileID: 2100000, guid: c55a0a9c51bcd8e459676422a27685ef, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_axe_wood 2
-    second: {fileID: 2100000, guid: df5cb6c835c863640a9d5bfe956baa58, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
