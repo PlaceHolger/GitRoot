@@ -25,7 +25,7 @@ MonoBehaviour:
   apiPort: 64001
   localHttpServerHost: localhost
   localHttpServerPort: 42006
-  localDevelopmentMode: 1
+  localDevelopmentMode: 0
   useDebugStreams: 0
   organizationID: cfeipttbo1hpmarb3sp0
   projectID: cfemhatbo1hvesc3kha0
