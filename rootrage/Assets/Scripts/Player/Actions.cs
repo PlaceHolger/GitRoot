@@ -6,7 +6,7 @@ public class Actions : MonoBehaviour
 {
     public Animator animator;
     public RootCreator rootCreator;
-    
+
     [field: Header("Inputs")] public Vector3 MoveInput { get; set; }
 
     [Header("Horizontal movement")] public float movementSpeed = 8f;
@@ -125,7 +125,7 @@ public class Actions : MonoBehaviour
     public void TryShoot()
     {
         bool isSomethingInMeleeRange = rootCreator.IsSomethingInMeleeRange();
-        if (!isSomethingInMeleeRange) 
+        if (!isSomethingInMeleeRange)
         {
             _isShooting = true;
             animator.SetBool("isShooting", true);
@@ -143,7 +143,7 @@ public class Actions : MonoBehaviour
         {
             _isShooting = false;
             animator.SetBool("isShooting", false);
-        }        
+        }
     }
 
     private void Shoot()
@@ -152,8 +152,14 @@ public class Actions : MonoBehaviour
         //_sync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Shoot");
     }
 
-    public void ApplyActions(bool shoot, Vector2 moveDir) {
+    public void ApplyActions(bool shoot, Vector2 moveDir)
+    {
         if (shoot) TryShoot();
         MoveInput = Vector3.right * moveDir.x + Vector3.forward * moveDir.y;
+    }
+
+    public void Reset()
+    {
+        InterruptShoot();
     }
 }

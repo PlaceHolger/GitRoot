@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private UnityEvent EventOnHit;
 
     private Actions _actions;
+
     private PlayerCollector _collector;
 
     [Serializable]
@@ -23,8 +24,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _actions = GetComponent<Actions>();
+        _collector = GetComponent<PlayerCollector>();
     }
-    
+
     public void OnHit()
     {
         _actions.InterruptShoot();
@@ -45,5 +47,11 @@ public class Player : MonoBehaviour
         PlayerInfo stats = new PlayerInfo();
         stats.score = _collector.CurrentScore;
         return stats;
+    }
+
+    public void Reset()
+    {
+        _collector.Reset();
+        _actions.Reset();
     }
 }

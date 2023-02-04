@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerCollector : MonoBehaviour
 {
-    private int currentScore;
+    private int currentScore = 0;
     public LayerMask collectablesMask = 1 << 10;
     public float collectRadius = 1;
 
@@ -20,12 +20,17 @@ public class PlayerCollector : MonoBehaviour
         foreach (var hitCollectable in hitColliders)
         {
             var collectableComp = hitCollectable.transform.GetComponent<Collectable>();
-            if (collectableComp)
+            if (collectableComp && !collectableComp.picked)
             {
                 collectableComp.OnCollect();
                 currentScore++;
                 //TODO: Update UI and stuff...
             }
         }
+    }
+
+    public void Reset()
+    {
+        currentScore = 0;
     }
 }
