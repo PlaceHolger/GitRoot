@@ -45,6 +45,12 @@ public class RootCreator : MonoBehaviour
     //         Gizmos.DrawWireCube(currentRootPos + (startForward * attackCheckRange), Vector3.one * attackCheckSize);
     //     }
     // }
+
+    public bool IsRootShootPossible()
+    {
+        var hits = Physics.BoxCastAll(transform.position - transform.forward, Vector3.one * attackCheckSize, transform.forward, transform.rotation, attackCheckRange, enableAttackLayerMask, QueryTriggerInteraction.Collide);
+        return hits.Length <= 0;
+    }
     
     public async void ShootForward()
     {
@@ -60,7 +66,7 @@ public class RootCreator : MonoBehaviour
         var hits = Physics.BoxCastAll(currentRootPos - startForward, Vector3.one * attackCheckSize, startForward, startRot, attackCheckRange, enableAttackLayerMask, QueryTriggerInteraction.Collide);
         if (hits.Length > 0) //something attackable is currently in front of us, instead of shoot, we do an attack
         {
-            Debug.Log("Hack-attack!");
+            //Debug.Log("Hack-attack!");
             foreach (RaycastHit hit in hits)
             {
                 var rootComp = hit.transform.parent.GetComponent<Root>();

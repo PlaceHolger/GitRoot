@@ -9,7 +9,6 @@ public class PlayerInput : MonoBehaviour
     public InputActionReference moveAction;
     public InputActionReference shootAction;
 
-    public bool allowShoot = true;
     public UnityEvent OnShootButtonEvent;
     public UnityEvent OnShootButtonReleasedEvent;
     
@@ -38,9 +37,8 @@ public class PlayerInput : MonoBehaviour
 
     private void ShootInputPerformed(InputAction.CallbackContext context)
     {
+        _characterController.TryShoot();
         OnShootButtonEvent.Invoke();
-        if(allowShoot)
-            _characterController.TryShoot();
     }
 
     private void ShootInputCanceled(InputAction.CallbackContext context)

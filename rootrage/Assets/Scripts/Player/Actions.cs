@@ -5,7 +5,8 @@ using UnityEngine;
 public class Actions : MonoBehaviour
 {
     public Animator animator;
-
+    public RootCreator rootCreator;
+    
     [field: Header("Inputs")] public Vector3 MoveInput { get; set; }
 
     [Header("Horizontal movement")] public float movementSpeed = 8f;
@@ -123,11 +124,16 @@ public class Actions : MonoBehaviour
 
     public void TryShoot()
     {
-        bool canShoot = true; //TODO add logic
-        if (canShoot) {
+        bool canShoot = rootCreator.IsRootShootPossible();
+        if (canShoot) 
+        {
             _isShooting = true;
             animator.SetBool("isShooting", true);
             Shoot();
+        }
+        else
+        {
+            animator.SetTrigger("Attack");
         }
     }
 
