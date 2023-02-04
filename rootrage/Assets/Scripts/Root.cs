@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Root : MonoBehaviour
 {
     private int hitPoints = 3;
-    private float destroyDelay = 0.1f;
+    private float destroyDelay = 0.2f;
 
     public UnityEvent EventOnHit;
     public UnityEvent EventOnDestroy;
@@ -16,7 +15,8 @@ public class Root : MonoBehaviour
         if (hitPoints-- <= 0)
         {
             EventOnDestroy.Invoke();
-            Destroy(gameObject, destroyDelay);
+            transform.DOScale(Vector3.zero, destroyDelay);
+            Destroy(gameObject, destroyDelay + 0.25f);
         }
         else EventOnHit.Invoke();
     }
