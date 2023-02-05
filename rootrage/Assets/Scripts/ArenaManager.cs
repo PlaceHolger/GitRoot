@@ -175,16 +175,46 @@ public class ArenaManager: MonoBehaviour
             
         }
 
-        /*
-        for ( int i = - arenaGridBorder + 1; i < arenaGridBorder; i++ )
+        for ( int i = - arenaGridBorder; i < arenaGridLength + arenaGridBorder; i++ )
         {
-            for ( int j = -arenaGridBorder + 1; j < arenaGridBorder; j++ )
+            for ( int j = -arenaGridBorder; j < arenaGridWidth + arenaGridBorder; j++ )
             {
-                (int x, int y) decorationCoord = (i, j);
-                if (decorationCoord.x >= )
+                if ( !(i >= -1 && i <= arenaGridLength && j >= -1 && j <= arenaGridWidth))
+                {
+                    //Debug.Log( $"deco at {i} {j}" );
+
+
+                    (int x, int y) decorationCoord = (i + arenaGridBorder, j + arenaGridBorder);
+
+                    Vector3 decorationPosition = new Vector3(decorationCoord.x, 0, decorationCoord.y);
+
+                    int xMul = i;
+                    if (xMul >= 0 && xMul < arenaGridLength) xMul = 0;
+                    else xMul = xMul % (arenaGridLength - 1);
+
+                    int yMul = j;
+                    if (yMul >= 0 && yMul < arenaGridWidth) yMul = 0;
+                    else yMul = yMul % (arenaGridWidth - 1);
+
+                    int randFac = Mathf.Max(Mathf.Abs(xMul), Mathf.Abs(yMul));
+
+                    for (int k = 0; k < 1 + (randFac / 2); k++)
+                    {
+                        if ( Random.Range(0, 2 * (arenaGridBorder + 1) ) < randFac )
+                        {
+                            decorationPosition += (Random.insideUnitSphere * 0.5f);
+                            decorationPosition.y = 0.5f;
+
+                            Vector3 rescale = Vector3.one + ( Vector3.one * 0.5f * ( (float)randFac / (float)arenaGridBorder ) );
+
+                            GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], decorationPosition, Quaternion.AngleAxis(Random.Range(0f,180f), Vector3.up), transform);
+                            decorationObject.transform.localScale = rescale;
+                        }
+                    }
+                }
+                
             }
         }
-        */
     }
 
     private (GameObject, Quaternion, int) ClassifyToCellPrefab (int key)
@@ -208,7 +238,7 @@ public class ArenaManager: MonoBehaviour
                 for ( int j = -1; j < 2; j++ )
                 {
                     (int x, int y) newCoord = (coordinate.x + i, coordinate.y + j);
-                    if ( newCoord.x < 0 || newCoord.x >= effectiveArenaGridLength -1 || newCoord.y <0 || newCoord.y >= effectiveArenaGridWidth -1 )
+                    if ( newCoord.x < 0 || newCoord.x >= effectiveArenaGridLength -1 || newCoord.y < 0 || newCoord.y >= effectiveArenaGridWidth -1 )
                     {
                         neighbourObstacles[((i + 1) * 3) + (j + 1)] = true;
                         nineNeighbours++;

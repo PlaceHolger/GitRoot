@@ -1,0 +1,13 @@
+{
+	"width":4,
+	"height":4,
+	"obstacles": [{}
+	],
+	"spawnPoints": [
+		{
+			"x": 1,
+			"y": 1
+		}
+	]
+}
+
