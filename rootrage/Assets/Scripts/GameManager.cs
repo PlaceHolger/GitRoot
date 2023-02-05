@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Collectable collectable;
     public List<Player> players;
     public int WinningScore = 10;
+    public int collectablesToSpawn = 15;
     [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
 
     private bool initialized = false;
@@ -87,11 +88,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnCollectables()
     {
-        int collectablesToSpawn = 20;
-        float radius = 1.0f;
         for (int i = 0; i < collectablesToSpawn; i++)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(0, 32), 0.8f, Random.Range(0, -16));
+            Vector3 spawnPos = new Vector3(arena.transform.localScale.x * (Random.Range(0, arena.ArenaGridWidth) + arena.ArenaGridBorder), 0.8f, -arena.transform.localScale.z * (Random.Range(0, arena.ArenaGridLength) + arena.ArenaGridBorder));
 
             Collider[] collisionResults = new Collider[16]; // can this be solved better?
             int hitCount = Physics.OverlapBoxNonAlloc(spawnPos, Vector3.one * 0.45f, collisionResults, transform.rotation, obstacleLayermask, QueryTriggerInteraction.Ignore);

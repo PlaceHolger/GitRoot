@@ -56060,7 +56060,11 @@ MonoBehaviour:
   players:
   - {fileID: 1592833256}
   - {fileID: 1897928115}
-  WinningScore: 2
+  WinningScore: 10
+  collectablesToSpawn: 15
+  obstacleLayermask:
+    serializedVersion: 2
+    m_Bits: 448
 --- !u!4 &856377881
 Transform:
   m_ObjectHideFlags: 0
