@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     private UnityEvent OnPlayerCloseToWinningNotEvent;
     [SerializeField]
     private UnityEvent OnPlayerCloseToWinningEvent;
+    [FormerlySerializedAs("OnGameOver")] [SerializeField]
+    private UnityEvent OnGameOverEvent;
 
     public ArenaManager arena;
 
@@ -78,7 +81,7 @@ public class GameManager : MonoBehaviour
                 newHighestScore = info.score;
         }
 
-        if (newHighestScore != currentHighestScore)
+        if (newHighestScore != currentHighestScore && !ended)
         {
             if (newHighestScore >= WinningScore - 1) //dramatic
                 OnPlayerCloseToWinningEvent.Invoke();
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
         }
         scoreBoardsUI[winner].SetText("Won");
         Invoke(nameof(Reset), 5.0f);
+        OnGameOverEvent.Invoke();
     }
 
     public void Reset()
