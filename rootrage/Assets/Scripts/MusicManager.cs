@@ -9,6 +9,7 @@ public class MusicManager : MonoBehaviour
     public AudioSource MenuMusic;
     public AudioSource DramaticMusic;
     public AudioSource NormalMusic;
+    public AudioSource WinMusic;
 
     public void StartMenuMusic()
     {
@@ -16,6 +17,7 @@ public class MusicManager : MonoBehaviour
         MenuMusic.DOFade(1.0f, FadeTime);
         DramaticMusic.DOFade(0.0f, FadeTime).OnComplete(() => DramaticMusic.Stop());
         NormalMusic.DOFade(0.0f, FadeTime).OnComplete(() => NormalMusic.Stop());
+        WinMusic.DOFade(0.0f, FadeTime).OnComplete(() => WinMusic.Stop());
     }
     
     public void StartNormalMusic()
@@ -25,6 +27,7 @@ public class MusicManager : MonoBehaviour
         DramaticMusic.DOFade(0.0f, FadeTime);
         NormalMusic.DOFade(1.0f, FadeTime);
         MenuMusic.DOFade(0.0f, FadeTime).OnComplete(() => MenuMusic.Stop());
+        WinMusic.DOFade(0.0f, FadeTime).OnComplete(() => WinMusic.Stop());
     }
     
     public void StartDramaticMusic()
@@ -33,6 +36,16 @@ public class MusicManager : MonoBehaviour
         NormalMusic.Play();
         DramaticMusic.DOFade(1.0f, FadeTime);
         NormalMusic.DOFade(0.0f, FadeTime);
+        MenuMusic.DOFade(0.0f, FadeTime).OnComplete(() => MenuMusic.Stop());
+        WinMusic.DOFade(0.0f, FadeTime).OnComplete(() => WinMusic.Stop());
+    }
+    
+    public void StartWinMusic()
+    {
+        WinMusic.Play();
+        WinMusic.DOFade(1.0f, FadeTime * 0.5f);
+        NormalMusic.DOFade(0.0f, FadeTime * 0.5f);
+        DramaticMusic.DOFade(0.0f, FadeTime * 0.5f);
         MenuMusic.DOFade(0.0f, FadeTime).OnComplete(() => MenuMusic.Stop());
     }
 }

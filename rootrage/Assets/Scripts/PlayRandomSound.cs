@@ -10,7 +10,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
-        if (audioSourceToUse)
+        if (!audioSourceToUse)
             audioSourceToUse = GetComponent<AudioSource>();
     }
 

@@ -490,8 +490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPrefab: {fileID: 8330739102840963238, guid: ee25081abcbe05b4cb3ff1991716cf96,
     type: 3}
-  delayRootParts: 111
-  maxLength: 33
+  delayRootParts: 50
+  maxLength: 36
   attackCheckSize: 0.666
   attackCheckRange: 1.5
   obstacleLayermask:
@@ -623,6 +623,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _skinnedMeshRenderer: {fileID: 0}
 --- !u!1 &8068970153219301359
 GameObject:
   m_ObjectHideFlags: 0
