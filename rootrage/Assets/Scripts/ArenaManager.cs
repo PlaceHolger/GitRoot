@@ -209,7 +209,9 @@ public class ArenaManager: MonoBehaviour
 
                             if (decorationTreePrefabs.Count > 0)
                             {
-                                GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], decorationPosition, Quaternion.AngleAxis(Random.Range(0f,180f), Vector3.up), transform);
+                                GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], transform);
+                                decorationObject.transform.localPosition = decorationPosition;
+                                decorationObject.transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
                                 decorationObject.transform.localScale = rescale;                                
                             }
                         }
