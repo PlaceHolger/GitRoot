@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b7b5c6b186a974e927b7c1540ed7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 3
+  hitPoints: 2
   destroyDelay: 0.2
   EventOnCreate:
     m_PersistentCalls:
@@ -505,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 314061aabef5fcf4789d34dd8b6c92c3,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 314061aabef5fcf4789d34dd8b6c92c3,
         type: 3}

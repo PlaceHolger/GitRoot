@@ -29,7 +29,11 @@ public class Root : MonoBehaviour
         if (hitPoints <= 0)
         {
             EventOnDestroy.Invoke();
-            transform.DOScale(Vector3.zero, destroyDelay).OnComplete(() => gameObject.SetActive(false));;
+            transform.DOScale(Vector3.zero, destroyDelay).OnComplete(() =>
+            {
+                if(gameObject) 
+                    gameObject.SetActive(false);
+            });
             
             //if we die, we also break our siblings
             var siblingRoots = transform.parent.gameObject.GetComponentsInChildren<Root>();
@@ -38,7 +42,7 @@ public class Root : MonoBehaviour
                 Root sibling = siblingRoots[index];
                 if (sibling == this)
                 {
-                    await Task.Delay(150);
+                    await Task.Delay(100);
                     if (index < siblingRoots.Length - 1)
                     {
                         Root prevSibling = siblingRoots[index + 1];
