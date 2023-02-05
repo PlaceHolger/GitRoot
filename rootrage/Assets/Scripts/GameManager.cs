@@ -1,12 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent OnPlayerCloseToWinningNotEvent;
+    [SerializeField]
+    private UnityEvent OnPlayerCloseToWinningEvent; 
+    
     public ArenaManager arena;
 
     public Collectable collectable;
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
 
     private bool initialized = false;
+    private int currentHighestScore = 0; 
 
     private void Awake()
     {
@@ -39,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         LastSpawnCollectable += Time.deltaTime;
 
+        int newHighestScore = 0;
         foreach (var player in players)
         {
             Player.PlayerInfo info = player.GetStats();
@@ -48,6 +53,18 @@ public class GameManager : MonoBehaviour
                 Reset();
                 break;
             }
+
+            if (info.score > newHighestScore)
+                newHighestScore = info.score;
+        }
+        
+        if (newHighestScore != currentHighestScore)
+        {
+            if(newHighestScore >= WinningScore - 1) //dramatic
+                OnPlayerCloseToWinningEvent.Invoke();
+            else if(newHighestScore < WinningScore - 3 && currentHighestScore >= WinningScore - 3)  //was dramatic, is now not dramatic anymore
+                OnPlayerCloseToWinningNotEvent.Invoke();
+            currentHighestScore = newHighestScore;
         }
 
         if (CountCollectables() < maxCollectables)
@@ -79,6 +96,9 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        currentHighestScore = 0;
+        OnPlayerCloseToWinningNotEvent.Invoke();
+        
         Root[] roots = FindObjectsOfType<Root>();
         foreach (Root root in roots)
         {
