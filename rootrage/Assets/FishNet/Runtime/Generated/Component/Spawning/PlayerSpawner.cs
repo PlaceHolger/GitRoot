@@ -2,6 +2,7 @@
 using FishNet.Managing;
 using FishNet.Object;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -56,6 +57,10 @@ namespace FishNet.Component.Spawning
 
         private void Start()
         {
+            var spawnpoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+            var list = Spawns.ToList();
+            list.AddRange(spawnpoints.Select(x => x.transform));
+            Spawns = list.ToArray();
             InitializeOnce();
         }
 

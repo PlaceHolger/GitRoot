@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RootShootRange.unity
-    guid: 7a9bc472ad06d0f4787a74336fd6bb0c
+    path: Assets/Scenes/FishyRootShootRange.unity
+    guid: 7b30767c22350ad418404100f67eacff
   m_configObjects:
     io.coherence.simulator.build.options: {fileID: 11400000, guid: 3259c9986dd9f7940ae1f7ad59d6e873,
       type: 2}

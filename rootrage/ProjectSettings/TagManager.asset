@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Root
   - Collectable
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

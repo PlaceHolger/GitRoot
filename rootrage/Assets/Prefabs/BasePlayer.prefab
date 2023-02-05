@@ -506,6 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf9e7e081a417540bd2d53cd72629f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   moveAction: {fileID: 3175661613099210018, guid: 1456b9964fbfd124d9e60875fc4218b7,
     type: 3}
   shootAction: {fileID: -6541378028284966139, guid: 1456b9964fbfd124d9e60875fc4218b7,
