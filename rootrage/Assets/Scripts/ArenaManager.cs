@@ -207,8 +207,11 @@ public class ArenaManager: MonoBehaviour
 
                             Vector3 rescale = Vector3.one + ( Vector3.one * 0.5f * ( (float)randFac / (float)arenaGridBorder ) );
 
-                            GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], decorationPosition, Quaternion.AngleAxis(Random.Range(0f,180f), Vector3.up), transform);
-                            decorationObject.transform.localScale = rescale;
+                            if (decorationTreePrefabs.Count > 0)
+                            {
+                                GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], decorationPosition, Quaternion.AngleAxis(Random.Range(0f,180f), Vector3.up), transform);
+                                decorationObject.transform.localScale = rescale;                                
+                            }
                         }
                     }
                 }

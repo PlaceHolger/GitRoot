@@ -43393,13 +43393,13 @@ PrefabInstance:
         type: 3}
       propertyPath: moveAction
       value: 
-      objectReference: {fileID: 3175661613099210018, guid: 4d9b796ff33fcc542b65b5d444e553b2,
+      objectReference: {fileID: 3175661613099210018, guid: 15d7f3a0dc27ea0489ec1aea0fbd02b7,
         type: 3}
     - target: {fileID: 2622585547491156471, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: shootAction
       value: 
-      objectReference: {fileID: -6541378028284966139, guid: 4d9b796ff33fcc542b65b5d444e553b2,
+      objectReference: {fileID: -6541378028284966139, guid: 15d7f3a0dc27ea0489ec1aea0fbd02b7,
         type: 3}
     - target: {fileID: 5696419061585100457, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
@@ -56198,7 +56198,8 @@ MonoBehaviour:
   - {fileID: 11322483}
   - {fileID: 1962189205}
   WinningScore: 10
-  collectablesToSpawn: 15
+  maxCollectables: 15
+  SpawnCollectableCooldown: 4
   obstacleLayermask:
     serializedVersion: 2
     m_Bits: 320
@@ -73396,13 +73397,13 @@ PrefabInstance:
         type: 3}
       propertyPath: moveAction
       value: 
-      objectReference: {fileID: 3175661613099210018, guid: 4d9b796ff33fcc542b65b5d444e553b2,
+      objectReference: {fileID: 3175661613099210018, guid: 3acad026632f1cb449c83edcab6064ad,
         type: 3}
     - target: {fileID: 2622585547491156471, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: shootAction
       value: 
-      objectReference: {fileID: -6541378028284966139, guid: 4d9b796ff33fcc542b65b5d444e553b2,
+      objectReference: {fileID: -6541378028284966139, guid: 3acad026632f1cb449c83edcab6064ad,
         type: 3}
     - target: {fileID: 5696419061585100457, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
@@ -102177,16 +102178,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.2444159
-      objectReference: {fileID: 0}
-    - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.14824097
-      objectReference: {fileID: 0}
     - target: {fileID: 2069086436844582469, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_RootOrder
@@ -102249,8 +102240,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069086436844582473, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}

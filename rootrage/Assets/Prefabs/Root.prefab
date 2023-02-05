@@ -190,6 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8707546876787464732}
   - component: {fileID: 4978236936416153810}
+  - component: {fileID: 383908517315878018}
+  - component: {fileID: 6213269338828514554}
+  - component: {fileID: 4054257480758835615}
   m_Layer: 0
   m_Name: Root
   m_TagString: Root
@@ -228,12 +231,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b7b5c6b186a974e927b7c1540ed7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: 3
+  destroyDelay: 0.2
+  EventOnCreate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4054257480758835615}
+        m_TargetAssemblyTypeName: SpawnParticleHelper, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   EventOnHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6213269338828514554}
+        m_TargetAssemblyTypeName: SpawnParticleHelper, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   EventOnDestroy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 383908517315878018}
+        m_TargetAssemblyTypeName: SpawnParticleHelper, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &383908517315878018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330739102840963238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53fb2468962b34f9b18a467606e00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleToSpawn: {fileID: 5326110762471845725, guid: af7e2ebba5a4c9343acdb8a263552536,
+    type: 3}
+  lifeTime: 1.5
+--- !u!114 &6213269338828514554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330739102840963238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53fb2468962b34f9b18a467606e00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleToSpawn: {fileID: 3856719052348990830, guid: 31aca23ef40deb24389b7ea476c47209,
+    type: 3}
+  lifeTime: 0.5
+--- !u!114 &4054257480758835615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330739102840963238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53fb2468962b34f9b18a467606e00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleToSpawn: {fileID: 5326110762471845725, guid: a8a4f4c2ee1652448ae6569e5a00ae25,
+    type: 3}
+  lifeTime: 1.25
 --- !u!1 &8626292934345712741
 GameObject:
   m_ObjectHideFlags: 0
