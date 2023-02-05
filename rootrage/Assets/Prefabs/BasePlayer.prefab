@@ -439,15 +439,16 @@ MonoBehaviour:
   rootPrefab: {fileID: 8330739102840963238, guid: ee25081abcbe05b4cb3ff1991716cf96,
     type: 3}
   delayRootParts: 111
-  maxLength: 20
+  maxLength: 33
   attackCheckSize: 0.666
   attackCheckRange: 1.5
   obstacleLayermask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 320
   enableAttackLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 576
+  ownCollider: {fileID: 0}
   EventStartRooting:
     m_PersistentCalls:
       m_Calls:
