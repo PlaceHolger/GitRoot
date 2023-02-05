@@ -448,7 +448,7 @@ MonoBehaviour:
   enableAttackLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  ownCollider: {fileID: 0}
+  ownCollider: {fileID: 5423902492273474670}
   EventStartRooting:
     m_PersistentCalls:
       m_Calls:

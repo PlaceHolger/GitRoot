@@ -26,6 +26,11 @@ public class PlayerJoinManager : MonoBehaviour
         
         JoinP4Action.asset.Enable();
         JoinP4Action.action.performed += P4Joined;
+        
+        player1.SetActive(false);
+        player2.SetActive(false);
+        player3.SetActive(false);
+        player4.SetActive(false);
     }
 
     private void P1Joined(InputAction.CallbackContext obj)

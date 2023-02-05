@@ -31,11 +31,6 @@ public class RootCreator : MonoBehaviour
 
     //Todo: particle in front, mesh in front different from rest...
 
-    private void Awake()
-    {
-        ownCollider = GetComponent<Collider>();
-    }
-
     public void StopShoot()
     {
         isShooting = false;
