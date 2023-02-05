@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        _skinnedMeshRenderer.SetBlendShapeWeight(0, 100.0f * _collector.CurrentScore / (_manager.WinningScore - 1.0));
+        _skinnedMeshRenderer.SetBlendShapeWeight(0, 100.0f * _collector.CurrentScore / (_manager.WinningScore - 1.0f));
     }
 
     public void OnHit()
