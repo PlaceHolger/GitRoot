@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +13,8 @@ public class RootCreator : MonoBehaviour
     [SerializeField] private float attackCheckRange = 2;
     [FormerlySerializedAs("layermask")] [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
     [SerializeField] private LayerMask enableAttackLayerMask = 1 << 9; //by default 'attackable'
-
+    [SerializeField] private Collider ownCollider; //we disable our own collider during firing, so we dont shoot ourself =)
+    
     [SerializeField] private UnityEvent EventStartRooting;
     [SerializeField] private UnityEvent EventStopRooting;
     [SerializeField] private UnityEvent EventAttackStart;
@@ -27,7 +29,12 @@ public class RootCreator : MonoBehaviour
         set => attackAnimReady = value;
     }
 
-    //Todo: particle in front, mesh in front different from rest, sound...
+    //Todo: particle in front, mesh in front different from rest...
+
+    private void Awake()
+    {
+        ownCollider = GetComponent<Collider>();
+    }
 
     public void StopShoot()
     {
@@ -48,7 +55,10 @@ public class RootCreator : MonoBehaviour
     public bool IsSomethingInMeleeRange()
     {
         var transform1 = transform;
-        return Physics.CheckBox(transform1.position + transform1.forward, Vector3.one * 0.5f, transform1.rotation, enableAttackLayerMask, QueryTriggerInteraction.Collide);
+        ownCollider.enabled = false;
+        bool result = Physics.CheckBox(transform1.position + transform1.forward, Vector3.one * 0.5f, transform1.rotation, enableAttackLayerMask, QueryTriggerInteraction.Collide);
+        ownCollider.enabled = true;
+        return result;
     }
     
     public async void ShootForward()
@@ -62,7 +72,10 @@ public class RootCreator : MonoBehaviour
         float startDelay = (float)delayRootParts;
         int currentLength = 0;
         
+        ownCollider.enabled = false;
         int hitCount = Physics.OverlapBoxNonAlloc(currentRootPos + startForward, Vector3.one * 0.5f, collisionResults, startRot, enableAttackLayerMask, QueryTriggerInteraction.Collide);
+        ownCollider.enabled = true;
+
         if (hitCount > 0) //something attackable is currently in front of us, instead of shoot, we do an attack
         {
             //Debug.Log("Hack-attack!");
@@ -105,8 +118,10 @@ public class RootCreator : MonoBehaviour
             startForward = Vector3.Lerp(startForward, transform.forward, 0.04f);
             
             currentRootPos += startForward;
+            ownCollider.enabled = false;
             hitCount = Physics.OverlapBoxNonAlloc(currentRootPos, Vector3.one * 0.45f, collisionResults, startRot, obstacleLayermask, QueryTriggerInteraction.Ignore);
             Instantiate(rootPrefab, currentRootPos, startRot, rootParent.transform);
+            ownCollider.enabled = true;
            
             if (hitCount > 0)
             {
