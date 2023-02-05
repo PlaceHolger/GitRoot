@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,14 @@ public class PlayerJoinManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player1.SetActive(false);
+        player2.SetActive(false);
+        player3.SetActive(false);
+        player4.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
         JoinP1Action.asset.Enable();
         JoinP1Action.action.performed += P1Joined;
         
@@ -26,11 +35,14 @@ public class PlayerJoinManager : MonoBehaviour
         
         JoinP4Action.asset.Enable();
         JoinP4Action.action.performed += P4Joined;
-        
-        player1.SetActive(false);
-        player2.SetActive(false);
-        player3.SetActive(false);
-        player4.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        JoinP1Action.action.performed -= P1Joined;
+        JoinP2Action.action.performed -= P2Joined;
+        JoinP3Action.action.performed -= P3Joined;
+        JoinP4Action.action.performed -= P4Joined;
     }
 
     private void P1Joined(InputAction.CallbackContext obj)

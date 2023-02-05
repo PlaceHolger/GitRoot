@@ -87,7 +87,7 @@ public class Actions : MonoBehaviour
 
         // Apply both components to find final frame velocity
         _rigidbody.velocity = _horizontalVelocity + _verticalVelocity;
-        if (!_isGrounded) _verticalVelocity = Vector3.Project(_rigidbody.velocity, Vector3.up);
+        _verticalVelocity = !_isGrounded ? Vector3.Project(_rigidbody.velocity, Vector3.up) : Vector3.zero;
 
         if (inputMagnitude > 0f /*&& !_isShooting*/)
         {
