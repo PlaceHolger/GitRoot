@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     public Collectable collectable;
     public List<Player> players;
     public int WinningScore = 10;
-    public int collectablesToSpawn = 15;
+    public int maxCollectables = 15;
+    private float LastSpawnCollectable = 0.0f;
+    [SerializeField] private float SpawnCollectableCooldown = 4.0f;
     [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
 
     private bool initialized = false;
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
     {
         if (!initialized) return;
 
+        LastSpawnCollectable += Time.deltaTime;
+
         foreach (var player in players)
         {
             Player.PlayerInfo info = player.GetStats();
@@ -45,6 +49,27 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
+        if (CountCollectables() < maxCollectables)
+        {
+            if (SpawnCollectableCooldown < LastSpawnCollectable)
+            {
+                LastSpawnCollectable = 0.0f;
+                SpawnCollectables(1);
+            }
+        }
+    }
+
+    private int CountCollectables()
+    {
+        int collectablesInGame = 0;
+        foreach (var player in players)
+        {
+            collectablesInGame += player.GetStats().score;
+        }
+        Collectable[] others = FindObjectsOfType<Collectable>();
+        collectablesInGame += others.Length;
+        return collectablesInGame;
     }
 
     protected void GameFinished(Player winner)
@@ -66,7 +91,7 @@ public class GameManager : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        SpawnCollectables();
+        SpawnCollectables(Mathf.RoundToInt(maxCollectables * 0.25f));
 
         List<GameObject> spawnPoints = new List<GameObject>(arena.ArenaSpawnPoints);
         foreach (var player in players)
@@ -86,9 +111,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SpawnCollectables()
+    private void SpawnCollectables(int numCollectables)
     {
-        for (int i = 0; i < collectablesToSpawn; i++)
+        for (int i = 0; i < numCollectables; i++)
         {
             Vector3 spawnPos = new Vector3(arena.transform.localScale.x * (Random.Range(0, arena.ArenaGridWidth) + arena.ArenaGridBorder), 0.8f, -arena.transform.localScale.z * (Random.Range(0, arena.ArenaGridLength) + arena.ArenaGridBorder));
 
