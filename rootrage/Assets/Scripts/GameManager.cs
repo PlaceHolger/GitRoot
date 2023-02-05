@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     private int currentHighestScore = 0;
 
     private bool started = false;
+    private bool ended = false;
+    private int winner = 0;
     [SerializeField] public List<TMP_Text> scoreBoardsUI;
     [SerializeField] public List<TMP_Text> controlsUI;
     [SerializeField] public List<TMP_Text> playerNameUI;
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!initialized) return;
 
@@ -59,13 +61,17 @@ public class GameManager : MonoBehaviour
                 scoreBoardsUI[i].gameObject.SetActive(true);
                 playerNameUI[i].gameObject.SetActive(true);
                 controlsUI[i].gameObject.SetActive(false);
-                scoreBoardsUI[i].SetText(info.score.ToString());
+                if (!ended) scoreBoardsUI[i].SetText(info.score.ToString());
             }
             if (info.score >= WinningScore)
             {
-                GameFinished(players[i]);
-                Reset();
-                break;
+                if (!ended)
+                {
+                    ended = true;
+                    winner = i;
+                    GameFinished();
+                    break;
+                }
             }
 
             if (info.score > newHighestScore)
@@ -103,14 +109,20 @@ public class GameManager : MonoBehaviour
         return collectablesInGame;
     }
 
-    protected void GameFinished(Player winner)
+    protected void GameFinished()
     {
-        Debug.Log("Game ended!");
+        foreach (var board in scoreBoardsUI)
+        {
+            board.SetText("");
+        }
+        scoreBoardsUI[winner].SetText("Won");
+        Invoke(nameof(Reset), 5.0f);
     }
 
     public void Reset()
     {
         started = false;
+        ended = false;
         foreach (var board in scoreBoardsUI)
         {
             board.gameObject.SetActive(false);
