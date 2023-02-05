@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         _actions = GetComponent<Actions>();
         _collector = GetComponent<PlayerCollector>();
-        _manager = FindObjectOfType<GameManager>();
+        _manager = FindObjectOfType<GameManager>(true);
     }
 
     void FixedUpdate()
