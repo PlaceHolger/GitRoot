@@ -2,14 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent OnPlayerCloseToWinningNotEvent;
     [SerializeField]
-    private UnityEvent OnPlayerCloseToWinningEvent; 
-    
+    private UnityEvent OnPlayerCloseToWinningEvent;
+
     public ArenaManager arena;
 
     public Collectable collectable;
@@ -21,7 +22,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
 
     private bool initialized = false;
-    private int currentHighestScore = 0; 
+    private int currentHighestScore = 0;
+
+    private bool started = false;
+    [SerializeField] public List<TMP_Text> scoreBoardsUI;
+    [SerializeField] public List<TMP_Text> controlsUI;
+    [SerializeField] public List<TMP_Text> playerNameUI;
 
     private void Awake()
     {
@@ -44,12 +50,20 @@ public class GameManager : MonoBehaviour
         LastSpawnCollectable += Time.deltaTime;
 
         int newHighestScore = 0;
-        foreach (var player in players)
+        for (int i = 0; i < players.Count; i++)
         {
-            Player.PlayerInfo info = player.GetStats();
+            Player.PlayerInfo info = players[i].GetStats();
+            if (info.score > 0)
+            {
+                StartGame();
+                scoreBoardsUI[i].gameObject.SetActive(true);
+                playerNameUI[i].gameObject.SetActive(true);
+                controlsUI[i].gameObject.SetActive(false);
+                scoreBoardsUI[i].SetText(info.score.ToString());
+            }
             if (info.score >= WinningScore)
             {
-                GameFinished(player);
+                GameFinished(players[i]);
                 Reset();
                 break;
             }
@@ -57,12 +71,12 @@ public class GameManager : MonoBehaviour
             if (info.score > newHighestScore)
                 newHighestScore = info.score;
         }
-        
+
         if (newHighestScore != currentHighestScore)
         {
-            if(newHighestScore >= WinningScore - 1) //dramatic
+            if (newHighestScore >= WinningScore - 1) //dramatic
                 OnPlayerCloseToWinningEvent.Invoke();
-            else if(newHighestScore < WinningScore - 3 && currentHighestScore >= WinningScore - 3)  //was dramatic, is now not dramatic anymore
+            else if (newHighestScore < WinningScore - 3 && currentHighestScore >= WinningScore - 3)  //was dramatic, is now not dramatic anymore
                 OnPlayerCloseToWinningNotEvent.Invoke();
             currentHighestScore = newHighestScore;
         }
@@ -96,9 +110,24 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        started = false;
+        foreach (var board in scoreBoardsUI)
+        {
+            board.gameObject.SetActive(false);
+            board.SetText("0");
+        }
+        foreach (var control in controlsUI)
+        {
+            control.gameObject.SetActive(true);
+        }
+        foreach (var name in playerNameUI)
+        {
+            name.gameObject.SetActive(false);
+        }
+
         currentHighestScore = 0;
         OnPlayerCloseToWinningNotEvent.Invoke();
-        
+
         Root[] roots = FindObjectsOfType<Root>();
         foreach (Root root in roots)
         {
@@ -164,5 +193,10 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    protected void StartGame()
+    {
+        started = true;
     }
 }
