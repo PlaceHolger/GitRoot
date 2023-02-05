@@ -15,6 +15,7 @@ public class AbsoluteGridSensor : GridSensorComponent
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = _arena.transform.position;
+        Vector2 center = _arena.GetArenaPosition();
+        transform.position = new Vector3(center.x, transform.position.y, center.y);
     }
 }

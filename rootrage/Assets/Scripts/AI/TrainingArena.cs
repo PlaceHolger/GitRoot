@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class TrainingArena : MonoBehaviour
 {
-    public List<Actions> players;
+    public List<Player> players;
+    private ArenaManager _arena;
 
     private bool _initialized;
     private int _resetTimer;
     public int maxEnvironmentSteps = 5000;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _arena = GetComponent<ArenaManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void Initialize()
@@ -47,7 +47,7 @@ public class TrainingArena : MonoBehaviour
     void FixedUpdate()
     {
         if (!_initialized) return;
-        
+
         //RESET SCENE IF WE MaxEnvironmentSteps
         _resetTimer += 1;
         if (_resetTimer >= maxEnvironmentSteps)
@@ -62,5 +62,11 @@ public class TrainingArena : MonoBehaviour
         {
             //player.Agent.EndEpisode(); TODO reset agent
         }
+    }
+
+    public Vector2 GetArenaPosition()
+    {
+        Vector2 arenaSize = new Vector2((_arena.transform.position.x + _arena.ArenaGridWidth / 2.0f + _arena.ArenaGridBorder) * _arena.transform.localScale.x, (_arena.transform.position.z - _arena.ArenaGridLength / 2.0f - _arena.ArenaGridBorder) * _arena.transform.localScale.z);
+        return arenaSize;
     }
 }
