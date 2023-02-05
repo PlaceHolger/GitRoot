@@ -56706,7 +56706,7 @@ MonoBehaviour:
   - {fileID: 11322483}
   - {fileID: 1962189205}
   WinningScore: 10
-  maxCollectables: 15
+  maxCollectables: 19
   SpawnCollectableCooldown: 4
   obstacleLayermask:
     serializedVersion: 2
