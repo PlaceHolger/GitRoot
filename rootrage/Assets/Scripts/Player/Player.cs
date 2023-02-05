@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Actions _actions;
 
     private PlayerCollector _collector;
+    public GameManager _manager;
 
     [Serializable]
     public class PlayerInfo
@@ -29,6 +30,12 @@ public class Player : MonoBehaviour
 
     public void OnHit()
     {
+        if (!_actions.IsStunned && _collector.CurrentScore > 0)
+        {
+            _collector.CurrentScore = _collector.CurrentScore - 1;
+            _manager.DropCollectables(transform.position);
+        }
+
         _actions.InterruptShoot();
         if (animator)
         {

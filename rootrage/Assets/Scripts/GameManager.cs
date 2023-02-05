@@ -100,7 +100,23 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                Instantiate(collectable, spawnPos, gameObject.transform.rotation, gameObject.transform);
+            }
+        }
+    }
+
+    public void DropCollectables(Vector3 position)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector2 circlePos = Random.insideUnitCircle.normalized * 3.0f;
+            Vector3 spawnPos = new Vector3(circlePos.x + position.x, position.y, circlePos.y + position.z);
+            Collider[] collisionResults = new Collider[16]; // can this be solved better?
+            int hitCount = Physics.OverlapBoxNonAlloc(spawnPos, Vector3.one * 1.0f, collisionResults, transform.rotation, obstacleLayermask, QueryTriggerInteraction.Ignore);
+            if (hitCount > -1)
+            {
                 Instantiate(collectable, spawnPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), gameObject.transform);
+                break;
             }
         }
     }

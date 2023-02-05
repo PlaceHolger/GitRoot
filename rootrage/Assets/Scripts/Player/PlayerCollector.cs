@@ -12,6 +12,7 @@ public class PlayerCollector : MonoBehaviour
     public int CurrentScore
     {
         get { return currentScore; }
+        set { currentScore = value; }
     }
 
     private void FixedUpdate()
