@@ -86,6 +86,9 @@ public class ArenaManager: MonoBehaviour
     [SerializeField]
     private List<GameObject> decorationTreePrefabs;
 
+    [SerializeField]
+    private List<GameObject> decorationScatterPrefabs;
+
     private List<GameObject> borderElements = new List<GameObject>();
 
     private List<GameObject> spawnPoints = new List<GameObject>();
@@ -218,6 +221,34 @@ public class ArenaManager: MonoBehaviour
                     }
                 }
                 
+            }
+        }
+
+        for ( int i = 1; i < arenaGridLength - 2; i++)
+        {
+            for ( int j = 1; j < arenaGridWidth - 2; j++ )
+            {
+                ArenaGridContentInformation gridContent = arenaGridContent.content[IndexAt(i + 1, j + 1)];
+
+                
+
+                for ( int k = 0; k < Random.RandomRange(0,2); k++ )
+                {
+
+                    Vector3 cellPosition = new Vector3(arenaGridBorder + i + 1, 0f, arenaGridBorder + j + 1);
+
+
+                    cellPosition += (Random.insideUnitSphere * 3f);
+                    cellPosition.y = 0f;
+
+
+                    GameObject scatterObject = Instantiate(decorationScatterPrefabs[Random.Range(0, decorationScatterPrefabs.Count)], transform);
+                    scatterObject.transform.localPosition = cellPosition;
+                    scatterObject.transform.localRotation = Quaternion.AngleAxis(Random.Range(0f,360f), Vector3.up);
+                    scatterObject.transform.localScale = Vector3.one * (0.1f + (Random.value * 0.3f));
+                }
+
+
             }
         }
     }
