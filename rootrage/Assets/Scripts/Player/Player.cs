@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     private PlayerCollector _collector;
     private GameManager _manager;
+    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+    private Mesh _skinnedMesh;
 
     [Serializable]
     public class PlayerInfo
@@ -27,6 +29,11 @@ public class Player : MonoBehaviour
         _actions = GetComponent<Actions>();
         _collector = GetComponent<PlayerCollector>();
         _manager = FindObjectOfType<GameManager>();
+    }
+
+    void FixedUpdate()
+    {
+        _skinnedMeshRenderer.SetBlendShapeWeight(0, 100.0f * _collector.CurrentScore / (_manager.WinningScore - 1.0));
     }
 
     public void OnHit()
