@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private Actions _actions;
 
     private PlayerCollector _collector;
-    public GameManager _manager;
+    private GameManager _manager;
 
     [Serializable]
     public class PlayerInfo
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     {
         _actions = GetComponent<Actions>();
         _collector = GetComponent<PlayerCollector>();
+        _manager = FindObjectOfType<GameManager>();
     }
 
     public void OnHit()
