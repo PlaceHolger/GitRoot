@@ -5,11 +5,11 @@ using Unity.MLAgents.Sensors;
 
 public class AbsoluteGridSensor : GridSensorComponent
 {
-    private TrainingArena _arena;
+    private ArenaManager _arena;
     // Start is called before the first frame update
     void Awake()
     {
-        _arena = GameObject.FindObjectsOfType<TrainingArena>()[0];
+        _arena = GameObject.FindObjectsOfType<ArenaManager>()[0];
     }
 
     // Update is called once per frame

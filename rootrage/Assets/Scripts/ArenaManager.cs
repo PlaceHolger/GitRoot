@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class ArenaDefinition
@@ -37,12 +38,12 @@ public enum ArenaGridContentInformation
 {
     Empty = 0,
     Ground = 1,
-    Obstacle = 2 
+    Obstacle = 2
 }
 
 public class ArenaGridContent
 {
-    public Dictionary<int,ArenaGridContentInformation> content = new Dictionary<int,ArenaGridContentInformation>();
+    public Dictionary<int, ArenaGridContentInformation> content = new Dictionary<int, ArenaGridContentInformation>();
 }
 
 public class ArenaGridConfiguration
@@ -50,8 +51,11 @@ public class ArenaGridConfiguration
     public Dictionary<int, ArenaGridContentInformation> contentConfiguration = new Dictionary<int, ArenaGridContentInformation>();
 }
 
-public class ArenaManager: MonoBehaviour
+public class ArenaManager : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent OnArenaReady;
+
     [SerializeField]
     private TextAsset arenaDefinitionFile;
 
@@ -105,12 +109,12 @@ public class ArenaManager: MonoBehaviour
         return (effectiveArenaGridWidth * x) + y;
     }
 
-    public (int x, int y) CoordAt ( int index )
+    public (int x, int y) CoordAt(int index)
     {
-        return ( index / effectiveArenaGridWidth, index % effectiveArenaGridWidth);
+        return (index / effectiveArenaGridWidth, index % effectiveArenaGridWidth);
     }
 
-    public void GenerateArena ( ArenaDefinition arenaDefinition )
+    public void GenerateArena(ArenaDefinition arenaDefinition)
     {
         arenaGridWidth = arenaDefinition.width;
         arenaGridLength = arenaDefinition.height;
@@ -120,40 +124,40 @@ public class ArenaManager: MonoBehaviour
 
         arenaGridContent.content.Clear();
 
-        for ( int i = 0; i < effectiveArenaGridLength; i++)
+        for (int i = 0; i < effectiveArenaGridLength; i++)
         {
             for (int j = 0; j < effectiveArenaGridWidth; j++)
             {
-                if ( i < arenaGridBorder || j < arenaGridBorder || i >= effectiveArenaGridLength - arenaGridBorder || j >= effectiveArenaGridWidth - arenaGridBorder)
+                if (i < arenaGridBorder || j < arenaGridBorder || i >= effectiveArenaGridLength - arenaGridBorder || j >= effectiveArenaGridWidth - arenaGridBorder)
                 {
-                    arenaGridContent.content[IndexAt(i,j)] = ArenaGridContentInformation.Obstacle;
+                    arenaGridContent.content[IndexAt(i, j)] = ArenaGridContentInformation.Obstacle;
                 }
                 else
                 {
-                    arenaGridContent.content[IndexAt(i,j)] = ArenaGridContentInformation.Ground;
+                    arenaGridContent.content[IndexAt(i, j)] = ArenaGridContentInformation.Ground;
                 }
             }
         }
 
-        foreach ( ArenaObstacle arenaObstacle in arenaDefinition.obstacles )
+        foreach (ArenaObstacle arenaObstacle in arenaDefinition.obstacles)
         {
-            for ( int i = arenaObstacle.x; i < arenaObstacle.x + arenaObstacle.height; i++ )
+            for (int i = arenaObstacle.x; i < arenaObstacle.x + arenaObstacle.height; i++)
             {
-                for ( int j = arenaObstacle.y; j < arenaObstacle.y + arenaObstacle.width; j++)
+                for (int j = arenaObstacle.y; j < arenaObstacle.y + arenaObstacle.width; j++)
                 {
                     arenaGridContent.content[IndexAt(i + arenaGridBorder, j + arenaGridBorder)] = ArenaGridContentInformation.Obstacle;
                 }
             }
         }
 
-        foreach ( ArenaSpawnPoints spawnPoint in arenaDefinition.spawnPoints )
+        foreach (ArenaSpawnPoints spawnPoint in arenaDefinition.spawnPoints)
         {
             GameObject spawnPointObject = Instantiate(arenaSpawnPoint, transform);
             spawnPointObject.transform.localPosition = new Vector3(spawnPoint.x + arenaGridBorder, 0, spawnPoint.y + arenaGridBorder);
             spawnPoints.Add(spawnPointObject);
         }
 
-        foreach ( var contentInformation in arenaGridContent.content )
+        foreach (var contentInformation in arenaGridContent.content)
         {
             GameObject cellContent;
 
@@ -161,28 +165,28 @@ public class ArenaManager: MonoBehaviour
 
             ArenaGridElement arenaGridElement = new ArenaGridElement();
             arenaGridElements[contentInformation.Key] = arenaGridElement;
-            if ( classification.go != null )
+            if (classification.go != null)
             {
                 (int x, int y) coord = CoordAt(contentInformation.Key);
                 arenaGridElement.groundGameObject = Instantiate(classification.go, transform);
                 arenaGridElement.groundGameObject.transform.localPosition = new Vector3(coord.x, 0, coord.y);
                 arenaGridElement.groundGameObject.transform.localRotation = classification.quat;
                 arenaGridElement.groundGameObject.name = $"{coord.x} {coord.y} {classification.cf}";
-                if ( classification.go != arenaEmptyGround && classification.go != arenaBorderPrefabs[2] )
+                if (classification.go != arenaEmptyGround && classification.go != arenaBorderPrefabs[2])
                 {
                     arenaGridElement.additionalGameObject = Instantiate(arenaEmptyGround, transform);
                     arenaGridElement.additionalGameObject.transform.localPosition = new Vector3(coord.x, 0, coord.y);
                     arenaGridElement.additionalGameObject.name = $"{coord.x} {coord.y} {classification.cf} add ground";
                 }
             }
-            
+
         }
 
-        for ( int i = - arenaGridBorder; i < arenaGridLength + arenaGridBorder; i++ )
+        for (int i = -arenaGridBorder; i < arenaGridLength + arenaGridBorder; i++)
         {
-            for ( int j = -arenaGridBorder; j < arenaGridWidth + arenaGridBorder; j++ )
+            for (int j = -arenaGridBorder; j < arenaGridWidth + arenaGridBorder; j++)
             {
-                if ( !(i >= -1 && i <= arenaGridLength && j >= -1 && j <= arenaGridWidth))
+                if (!(i >= -1 && i <= arenaGridLength && j >= -1 && j <= arenaGridWidth))
                 {
                     //Debug.Log( $"deco at {i} {j}" );
 
@@ -203,36 +207,36 @@ public class ArenaManager: MonoBehaviour
 
                     for (int k = 0; k < 1 + (randFac / 2); k++)
                     {
-                        if ( Random.Range(0, 2 * (arenaGridBorder + 1) ) < randFac )
+                        if (Random.Range(0, 2 * (arenaGridBorder + 1)) < randFac)
                         {
                             decorationPosition += (Random.insideUnitSphere * 0.5f);
                             decorationPosition.y = 0.5f;
 
-                            Vector3 rescale = Vector3.one + ( Vector3.one * 0.5f * ( (float)randFac / (float)arenaGridBorder ) );
+                            Vector3 rescale = Vector3.one + (Vector3.one * 0.5f * ((float)randFac / (float)arenaGridBorder));
 
                             if (decorationTreePrefabs.Count > 0)
                             {
                                 GameObject decorationObject = Instantiate(decorationTreePrefabs[Random.Range(0, decorationTreePrefabs.Count)], transform);
                                 decorationObject.transform.localPosition = decorationPosition;
                                 decorationObject.transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 180f), Vector3.up);
-                                decorationObject.transform.localScale = rescale;                                
+                                decorationObject.transform.localScale = rescale;
                             }
                         }
                     }
                 }
-                
+
             }
         }
 
-        for ( int i = 1; i < arenaGridLength - 2; i++)
+        for (int i = 1; i < arenaGridLength - 2; i++)
         {
-            for ( int j = 1; j < arenaGridWidth - 2; j++ )
+            for (int j = 1; j < arenaGridWidth - 2; j++)
             {
                 ArenaGridContentInformation gridContent = arenaGridContent.content[IndexAt(i + 1, j + 1)];
 
-                
 
-                for ( int k = 0; k < Random.RandomRange(0,2); k++ )
+
+                for (int k = 0; k < Random.RandomRange(0, 2); k++)
                 {
 
                     Vector3 cellPosition = new Vector3(arenaGridBorder + i + 1, 0f, arenaGridBorder + j + 1);
@@ -244,16 +248,17 @@ public class ArenaManager: MonoBehaviour
 
                     GameObject scatterObject = Instantiate(decorationScatterPrefabs[Random.Range(0, decorationScatterPrefabs.Count)], transform);
                     scatterObject.transform.localPosition = cellPosition;
-                    scatterObject.transform.localRotation = Quaternion.AngleAxis(Random.Range(0f,360f), Vector3.up);
+                    scatterObject.transform.localRotation = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.up);
                     scatterObject.transform.localScale = Vector3.one * (0.1f + (Random.value * 0.3f));
                 }
 
 
             }
         }
+        OnArenaReady.Invoke();
     }
 
-    private (GameObject, Quaternion, int) ClassifyToCellPrefab (int key)
+    private (GameObject, Quaternion, int) ClassifyToCellPrefab(int key)
     {
         int neighbours = 0;
         int nineNeighbours = 0;
@@ -267,14 +272,14 @@ public class ArenaManager: MonoBehaviour
 
         if (!arenaGridContent.content.ContainsKey(key)) return (null, Quaternion.identity, -1);
 
-        if ( arenaGridContent.content[key] == ArenaGridContentInformation.Obstacle )
+        if (arenaGridContent.content[key] == ArenaGridContentInformation.Obstacle)
         {
-            for ( int i = -1; i < 2; i++ )
+            for (int i = -1; i < 2; i++)
             {
-                for ( int j = -1; j < 2; j++ )
+                for (int j = -1; j < 2; j++)
                 {
                     (int x, int y) newCoord = (coordinate.x + i, coordinate.y + j);
-                    if ( newCoord.x < 0 || newCoord.x >= effectiveArenaGridLength -1 || newCoord.y < 0 || newCoord.y >= effectiveArenaGridWidth -1 )
+                    if (newCoord.x < 0 || newCoord.x >= effectiveArenaGridLength - 1 || newCoord.y < 0 || newCoord.y >= effectiveArenaGridWidth - 1)
                     {
                         neighbourObstacles[((i + 1) * 3) + (j + 1)] = true;
                         nineNeighbours++;
@@ -349,7 +354,7 @@ public class ArenaManager: MonoBehaviour
             return (arenaEmptyGround, Quaternion.identity, -1);
         }
 
-        switch ( neighbours )
+        switch (neighbours)
         {
             case 0:
                 return (arenaBorderPrefabs[1], Quaternion.identity, 0);
@@ -360,7 +365,7 @@ public class ArenaManager: MonoBehaviour
                 else if (!right && !bottom) return (arenaBorderPrefabs[3], Quaternion.identity, 22);
                 else return (arenaBorderPrefabs[3], Quaternion.AngleAxis(90f, Vector3.up), 23);
             case 3:
-                if (!left) return (arenaBorderPrefabs[1], Quaternion.AngleAxis(180f, Vector3.up),30);
+                if (!left) return (arenaBorderPrefabs[1], Quaternion.AngleAxis(180f, Vector3.up), 30);
                 else if (!top) return (arenaBorderPrefabs[1], Quaternion.AngleAxis(-90, Vector3.up), 31);
                 else if (!right) return (arenaBorderPrefabs[1], Quaternion.identity, 32);
                 else return (arenaBorderPrefabs[1], Quaternion.AngleAxis(90f, Vector3.up), 33);
@@ -377,7 +382,7 @@ public class ArenaManager: MonoBehaviour
 
     }
 
-    private ArenaDefinition LoadArenaDefinition ()
+    private ArenaDefinition LoadArenaDefinition()
     {
 
         ArenaDefinition fileArenaDefinition = JsonUtility.FromJson<ArenaDefinition>(arenaDefinitionFile.text);
@@ -388,6 +393,12 @@ public class ArenaManager: MonoBehaviour
 
     private void Awake()
     {
-        GenerateArena( LoadArenaDefinition() );
+        GenerateArena(LoadArenaDefinition());
+    }
+
+    public Vector2 GetArenaPosition()
+    {
+        Vector2 arenaSize = new Vector2((transform.position.x + ArenaGridWidth / 2.0f + ArenaGridBorder) * transform.localScale.x, (transform.position.z - ArenaGridLength / 2.0f - ArenaGridBorder) * transform.localScale.z);
+        return arenaSize;
     }
 }

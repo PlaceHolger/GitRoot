@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] private UnityEvent EventOnHit;
 
     private Actions _actions;
-
     private PlayerCollector _collector;
     private GameManager _manager;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;

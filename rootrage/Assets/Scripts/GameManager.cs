@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     private UnityEvent OnPlayerCloseToWinningNotEvent;
     [SerializeField]
     private UnityEvent OnPlayerCloseToWinningEvent;
-    [FormerlySerializedAs("OnGameOver")] [SerializeField]
+    [FormerlySerializedAs("OnGameOver")]
+    [SerializeField]
     private UnityEvent OnGameOverEvent;
 
     public ArenaManager arena;
@@ -24,31 +25,43 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float SpawnCollectableCooldown = 4.0f;
     [SerializeField] private LayerMask obstacleLayermask = 1 << 8 | 1 << 7 | 1 << 6; //by default 'player' and 'obstacle'
 
-    private bool initialized = false;
+
     private int currentHighestScore = 0;
 
+    private bool arenaReady = false;
+    private bool initialize = false;
+    private bool initialized = false;
     private bool started = false;
     private bool ended = false;
-    private int winner = 0;
+
+    private bool canvasAvailable = false;
+
     [SerializeField] public List<TMP_Text> scoreBoardsUI;
     [SerializeField] public List<TMP_Text> controlsUI;
     [SerializeField] public List<TMP_Text> playerNameUI;
 
-    private void Awake()
+    public void Initialize()
     {
-        Invoke(nameof(Initialize), 0.5f);
+        initialize = true;
+        checkAndPrepareField();
+    }
+    public void ArenaReady()
+    {
+        arenaReady = true;
+        checkAndPrepareField();
     }
 
-    private void Initialize()
+    public void checkAndPrepareField()
     {
-        if (!initialized)
+        if (!initialized && initialize && arenaReady)
         {
             initialized = true;
+            canvasAvailable = (controlsUI.Count == players.Count && playerNameUI.Count == players.Count && scoreBoardsUI.Count == players.Count);
             Reset();
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!initialized) return;
 
@@ -61,18 +74,19 @@ public class GameManager : MonoBehaviour
             if (info.score > 0)
             {
                 StartGame();
-                scoreBoardsUI[i].gameObject.SetActive(true);
-                playerNameUI[i].gameObject.SetActive(true);
-                controlsUI[i].gameObject.SetActive(false);
-                if (!ended) scoreBoardsUI[i].SetText(info.score.ToString());
+                if (canvasAvailable)
+                {
+                    scoreBoardsUI[i].gameObject.SetActive(true);
+                    playerNameUI[i].gameObject.SetActive(true);
+                    controlsUI[i].gameObject.SetActive(false);
+                    if (!ended) scoreBoardsUI[i].SetText(info.score.ToString());
+                }
             }
             if (info.score >= WinningScore)
             {
                 if (!ended)
                 {
-                    ended = true;
-                    winner = i;
-                    GameFinished();
+                    GameFinished(i);
                     break;
                 }
             }
@@ -90,7 +104,7 @@ public class GameManager : MonoBehaviour
             currentHighestScore = newHighestScore;
         }
 
-        if (CountCollectables() < maxCollectables)
+        if (started && CountCollectables() < maxCollectables)
         {
             if (SpawnCollectableCooldown < LastSpawnCollectable)
             {
@@ -112,13 +126,17 @@ public class GameManager : MonoBehaviour
         return collectablesInGame;
     }
 
-    protected void GameFinished()
+    protected void GameFinished(int winner)
     {
-        foreach (var board in scoreBoardsUI)
+        ended = true;
+        if (canvasAvailable)
         {
-            board.SetText("");
+            foreach (var board in scoreBoardsUI)
+            {
+                board.SetText("");
+            }
+            scoreBoardsUI[winner].SetText("Won");
         }
-        scoreBoardsUI[winner].SetText("Won");
         Invoke(nameof(Reset), 5.0f);
         OnGameOverEvent.Invoke();
     }
@@ -127,18 +145,21 @@ public class GameManager : MonoBehaviour
     {
         started = false;
         ended = false;
-        foreach (var board in scoreBoardsUI)
+        if (canvasAvailable)
         {
-            board.gameObject.SetActive(false);
-            board.SetText("0");
-        }
-        foreach (var control in controlsUI)
-        {
-            control.gameObject.SetActive(true);
-        }
-        foreach (var name in playerNameUI)
-        {
-            name.gameObject.SetActive(false);
+            foreach (var board in scoreBoardsUI)
+            {
+                board.gameObject.SetActive(false);
+                board.SetText("0");
+            }
+            foreach (var control in controlsUI)
+            {
+                control.gameObject.SetActive(true);
+            }
+            foreach (var name in playerNameUI)
+            {
+                name.gameObject.SetActive(false);
+            }
         }
 
         currentHighestScore = 0;
