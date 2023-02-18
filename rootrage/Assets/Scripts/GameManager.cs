@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
 
     private bool arenaReady = false;
     private bool initialize = false;
-    private bool initialized = false;
+    protected bool initialized = false;
     private bool started = false;
-    private bool ended = false;
+    protected bool ended = false;
 
     private bool canvasAvailable = false;
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if (!initialized) return;
 
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         return collectablesInGame;
     }
 
-    protected void GameFinished(int winner)
+    protected virtual void GameFinished(int winner)
     {
         ended = true;
         if (canvasAvailable)
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         OnGameOverEvent.Invoke();
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
         started = false;
         ended = false;

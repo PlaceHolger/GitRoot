@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public class PlayerInfo
     {
         public int score;
+        public bool isShooting;
+        public bool isStunned;
     }
 
     private void Awake()
@@ -60,6 +62,8 @@ public class Player : MonoBehaviour
     {
         PlayerInfo stats = new PlayerInfo();
         stats.score = _collector.CurrentScore;
+        stats.isStunned = _actions.IsStunned;
+        stats.isShooting = _actions.IsShooting;
         return stats;
     }
 

@@ -5,17 +5,37 @@ using Unity.MLAgents.Sensors;
 
 public class AbsoluteGridSensor : GridSensorComponent
 {
+    private bool _positionSet = false;
     private ArenaManager _arena;
-    // Start is called before the first frame update
+    private Vector3 _arenaPosistion;
+
     void Awake()
     {
+        // transform.parent = null;
         _arena = GameObject.FindObjectsOfType<ArenaManager>()[0];
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 center = _arena.GetArenaPosition();
-        transform.position = new Vector3(center.x, transform.position.y, center.y);
+        if (!_positionSet)
+        {
+
+            Vector2 center = _arena.GetArenaPosition();
+            _arenaPosistion = new Vector3(center.x, transform.position.y, center.y);
+            _positionSet = true;
+        }
+        transform.position = _arenaPosistion;
+    }
+
+    void Update()
+    {
+        if (!_positionSet)
+        {
+
+            Vector2 center = _arena.GetArenaPosition();
+            _arenaPosistion = new Vector3(center.x, transform.position.y, center.y);
+            _positionSet = true;
+        }
+        transform.position = _arenaPosistion;
     }
 }

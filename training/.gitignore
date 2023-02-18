@@ -1,0 +1,5 @@
+# Output Artifacts
+/results
+
+# Training environments
+/env

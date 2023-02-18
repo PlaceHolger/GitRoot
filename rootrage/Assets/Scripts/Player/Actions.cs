@@ -36,14 +36,15 @@ public class Actions : MonoBehaviour
     private float _timeSinceGrounded = 0;
     private bool _isFalling = true;
     private bool _isShooting = false;
+    public bool IsShooting { get { return _isShooting; } }
     private bool _isStunned = false;
-    
+
     public bool IsStunned
     {
         get => _isStunned;
         set => _isStunned = value;
     }
-    
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -161,7 +162,14 @@ public class Actions : MonoBehaviour
 
     public void ApplyActions(bool shoot, Vector2 moveDir)
     {
-        if (shoot) TryShoot();
+        if (shoot)
+        {
+            TryShoot();
+        }
+        else
+        {
+            InterruptShoot();
+        }
         MoveInput = Vector3.right * moveDir.x + Vector3.forward * moveDir.y;
     }
 

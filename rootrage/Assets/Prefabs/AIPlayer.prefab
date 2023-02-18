@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2444159
+      objectReference: {fileID: 0}
+    - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.14824097
+      objectReference: {fileID: 0}
     - target: {fileID: 2069086436844582469, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_RootOrder
@@ -66,6 +76,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AIPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038022599198791105, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676275309208135872, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6061831474829026733, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207254359254626796, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438182383425080812, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}
