@@ -26,13 +26,13 @@ public class PlayerJoinManager : MonoBehaviour
     {
         JoinP1Action.asset.Enable();
         JoinP1Action.action.performed += P1Joined;
-        
+
         JoinP2Action.asset.Enable();
         JoinP2Action.action.performed += P2Joined;
-        
+
         JoinP3Action.asset.Enable();
         JoinP3Action.action.performed += P3Joined;
-        
+
         JoinP4Action.asset.Enable();
         JoinP4Action.action.performed += P4Joined;
     }
@@ -50,19 +50,19 @@ public class PlayerJoinManager : MonoBehaviour
         player1.SetActive(true);
         JoinP1Action.action.performed -= P1Joined;
     }
-    
+
     private void P2Joined(InputAction.CallbackContext obj)
     {
         player2.SetActive(true);
         JoinP2Action.action.performed -= P2Joined;
     }
-    
+
     private void P3Joined(InputAction.CallbackContext obj)
     {
         player3.SetActive(true);
         JoinP3Action.action.performed -= P3Joined;
     }
-    
+
     private void P4Joined(InputAction.CallbackContext obj)
     {
         player4.SetActive(true);

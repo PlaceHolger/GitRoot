@@ -30,6 +30,7 @@ public class TrainingManager : GameManager
         Initialize();
 
         if (!initialized) return;
+        started = true;
 
         _resetTimer += 1;
         if (_resetTimer >= MaxEnvironmentSteps)
@@ -61,11 +62,11 @@ public class TrainingManager : GameManager
         {
             if (i == winner)
             {
-                agentsList[i].Agent.AddReward(1f);
+                agentsList[i].Agent.AddReward(2.0f - (_resetTimer / MaxEnvironmentSteps));
             }
             else
             {
-                agentsList[i].Agent.AddReward(-1f);
+                agentsList[i].Agent.AddReward(-1.0f);
             }
         }
         Reset();

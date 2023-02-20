@@ -8,14 +8,12 @@ public class PlayerInput : MonoBehaviour
     [Header("Inputs")]
     public InputActionReference moveAction;
     public InputActionReference shootAction;
-
-    public UnityEvent OnShootButtonEvent;
     public UnityEvent OnShootButtonReleasedEvent;
-    
+
     private Vector2 _rawInput;
     private Actions _characterController;
     //private Transform _cameraTransform;
-    
+
     private void Awake()
     {
         _characterController = GetComponent<Actions>();
@@ -37,11 +35,7 @@ public class PlayerInput : MonoBehaviour
 
     private void ShootInputPerformed(InputAction.CallbackContext context)
     {
-        if (!_characterController.IsStunned)
-        {
-            _characterController.TryShoot();
-            OnShootButtonEvent.Invoke();
-        }
+        _characterController.TryShoot();
     }
 
     private void ShootInputCanceled(InputAction.CallbackContext context)

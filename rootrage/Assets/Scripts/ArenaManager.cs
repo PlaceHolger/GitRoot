@@ -61,13 +61,13 @@ public class ArenaManager : MonoBehaviour
 
     [SerializeField]
     private int arenaGridWidth = 16;
-    public int ArenaGridWidth { get { return arenaGridWidth; } }
+    public float ArenaGridWidth { get { return arenaGridWidth * transform.localScale.z; } }
 
     private int effectiveArenaGridWidth { get { return arenaGridWidth + (arenaGridBorder * 2); } }
 
     [SerializeField]
     private int arenaGridLength = 9;
-    public int ArenaGridLength { get { return arenaGridLength; } }
+    public float ArenaGridLength { get { return arenaGridLength * transform.localScale.x; } }
 
     private int effectiveArenaGridLength { get { return arenaGridLength + (arenaGridBorder * 2); } }
 
@@ -76,7 +76,8 @@ public class ArenaManager : MonoBehaviour
 
     [SerializeField, Range(0, 7)]
     private int arenaGridBorder = 2;
-    public int ArenaGridBorder { get { return arenaGridBorder; } }
+    public float ArenaGridBorderLength { get { return arenaGridBorder * transform.localScale.x; } }
+    public float ArenaGridBorderWidth { get { return arenaGridBorder * transform.localScale.z; } }
 
     [SerializeField]
     private GameObject arenaEmptyGround;
@@ -399,7 +400,10 @@ public class ArenaManager : MonoBehaviour
 
     public Vector2 GetArenaPosition()
     {
-        Vector2 arenaSize = new Vector2((transform.position.x + ArenaGridWidth / 2.0f + ArenaGridBorder) * transform.localScale.x, (transform.position.z - ArenaGridLength / 2.0f - ArenaGridBorder) * transform.localScale.z);
+        Vector2 arenaSize = new Vector2(
+            (transform.position.x + ArenaGridLength / 2.0f + ArenaGridBorderLength),
+            (transform.position.z + ArenaGridWidth / 2.0f + ArenaGridBorderWidth)
+        );
         return arenaSize;
     }
 }

@@ -10,13 +10,18 @@ PrefabInstance:
     - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2444159
+      value: -0.24441592
       objectReference: {fileID: 0}
     - target: {fileID: 473498073898836789, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.14824097
+      value: -0.148241
       objectReference: {fileID: 0}
+    - target: {fileID: 2069086436844582465, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6493759474424882238}
     - target: {fileID: 2069086436844582469, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_RootOrder
@@ -87,6 +92,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5380777461781851782, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6061831474829026733, guid: f8b254a2942a441469aa656337a708f2,
         type: 3}
       propertyPath: m_IsActive
@@ -102,11 +112,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8459111060694164225, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: EventAttackStart.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: EventStopRooting.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480957351561665339, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: EventStartRooting.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802665750767505017, guid: f8b254a2942a441469aa656337a708f2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8b254a2942a441469aa656337a708f2, type: 3}
 --- !u!4 &4360031087341181954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2069086436844582469, guid: f8b254a2942a441469aa656337a708f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2321374756488784455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6493759474424882238 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8802665750767505017, guid: f8b254a2942a441469aa656337a708f2,
     type: 3}
   m_PrefabInstance: {fileID: 2321374756488784455}
   m_PrefabAsset: {fileID: 0}

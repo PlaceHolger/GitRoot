@@ -72,7 +72,7 @@ public class Actions : MonoBehaviour
                 ? deceleration
                 : airDeceleration;
 
-        Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, MoveInput, Time.deltaTime * inputAcceleration);
+        Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, new Vector3(-MoveInput.z, MoveInput.y, MoveInput.x), Time.deltaTime * inputAcceleration);
         float lerpedMagnitude = lerpedInputVector.magnitude;
 
         _currentSpeed = (_isShooting || _isStunned) ? 0 : movementSpeed;
@@ -92,7 +92,7 @@ public class Actions : MonoBehaviour
 
         if (inputMagnitude > 0f /*&& !_isShooting*/)
         {
-            Quaternion newRotation = Quaternion.LookRotation(MoveInput);
+            Quaternion newRotation = Quaternion.LookRotation(new Vector3(-MoveInput.z, MoveInput.y, MoveInput.x));
             transform.rotation = Quaternion.Lerp(_rigidbody.rotation, newRotation, Time.deltaTime * rotationSpeed);
         }
 
@@ -121,7 +121,7 @@ public class Actions : MonoBehaviour
         // This is used to blend between the Walk and Run animation clips in the Animator
         float animationSpeed = _horizontalVelocity.magnitude / _currentSpeed;
 
-        animator.SetFloat("MoveSpeed", animationSpeed);
+        if (animator) animator.SetFloat("MoveSpeed", animationSpeed);
     }
 
     private void ApplyGravity()
@@ -132,17 +132,20 @@ public class Actions : MonoBehaviour
 
     public void TryShoot()
     {
+        if (_isStunned || _isShooting) return;
+
         bool isSomethingInMeleeRange = rootCreator.IsSomethingInMeleeRange();
         if (!isSomethingInMeleeRange)
         {
             _isShooting = true;
-            animator.SetBool("isShooting", true);
-            Shoot();
+            if (animator) animator.SetBool("isShooting", true);
+            if (animator) animator.SetTrigger("Shoot");
         }
         else
         {
-            animator.SetTrigger("Attack");
+            if (animator) animator.SetTrigger("Attack");
         }
+        rootCreator.ShootForward();
     }
 
     public void InterruptShoot()
@@ -150,14 +153,9 @@ public class Actions : MonoBehaviour
         if (_isShooting)
         {
             _isShooting = false;
-            animator.SetBool("isShooting", false);
+            if (animator) animator.SetBool("isShooting", false);
+            rootCreator.StopShoot();
         }
-    }
-
-    private void Shoot()
-    {
-        animator.SetTrigger("Shoot");
-        //_sync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Shoot");
     }
 
     public void ApplyActions(bool shoot, Vector2 moveDir)

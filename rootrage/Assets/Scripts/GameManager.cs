@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     private bool arenaReady = false;
     private bool initialize = false;
     protected bool initialized = false;
-    private bool started = false;
+    protected bool started = false;
     protected bool ended = false;
 
     private bool canvasAvailable = false;
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         {
             collectablesInGame += player.GetStats().score;
         }
-        Collectable[] others = FindObjectsOfType<Collectable>();
+        Collectable[] others = transform.parent.GetComponentsInChildren<Collectable>();
         collectablesInGame += others.Length;
         return collectablesInGame;
     }
@@ -165,13 +165,13 @@ public class GameManager : MonoBehaviour
         currentHighestScore = 0;
         OnPlayerCloseToWinningNotEvent.Invoke();
 
-        Root[] roots = FindObjectsOfType<Root>();
+        Root[] roots = transform.parent.GetComponentsInChildren<Root>();
         foreach (Root root in roots)
         {
             Destroy(root.gameObject);
         }
 
-        Collectable[] others = FindObjectsOfType<Collectable>();
+        Collectable[] others = transform.parent.GetComponentsInChildren<Collectable>();
         foreach (Collectable other in others)
         {
             Destroy(other.gameObject);
@@ -201,7 +201,11 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < numCollectables; i++)
         {
-            Vector3 spawnPos = new Vector3(arena.transform.localScale.x * (Random.Range(0, arena.ArenaGridWidth) + arena.ArenaGridBorder), 0.8f, -arena.transform.localScale.z * (Random.Range(0, arena.ArenaGridLength) + arena.ArenaGridBorder));
+            Vector3 spawnPos = new Vector3(
+                arena.transform.position.x + (Random.Range(0, arena.ArenaGridLength) + arena.ArenaGridBorderLength),
+                arena.transform.position.y + 0.8f,
+                arena.transform.position.z + (Random.Range(0, arena.ArenaGridWidth) + arena.ArenaGridBorderWidth)
+            );
 
             Collider[] collisionResults = new Collider[16]; // can this be solved better?
             int hitCount = Physics.OverlapBoxNonAlloc(spawnPos, Vector3.one * 0.45f, collisionResults, transform.rotation, obstacleLayermask, QueryTriggerInteraction.Ignore);

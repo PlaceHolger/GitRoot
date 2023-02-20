@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Text;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -7,19 +9,21 @@ using Unity.MLAgents.Actuators;
 
 public class RootAgent : Agent
 {
-    private TrainingManager _manager;
+    [SerializeField] private TrainingManager _manager;
     private Player _player;
     private Actions _actions;
-    public BufferSensorComponent otherPlayerBuffer;
-    public float locationNormalizationFactor = 32.0f;
+    private BufferSensorComponent otherPlayerBuffer;
+    private float locationNormalizationFactor = 32.0f;
+
+    public ArenaManager GetArena { get { return _manager.arena; } }
 
     public override void Initialize()
     {
-        _manager = GameObject.FindObjectsOfType<TrainingManager>()[0];
         var bufferSensors = GetComponentsInChildren<BufferSensorComponent>();
         otherPlayerBuffer = bufferSensors[0];
         _player = GetComponentInParent<Player>();
         _actions = GetComponentInParent<Actions>();
+        locationNormalizationFactor = Mathf.Max(_manager.arena.ArenaGridWidth, _manager.arena.ArenaGridLength);
     }
 
     void FixedUpdate()
@@ -36,7 +40,7 @@ public class RootAgent : Agent
         otherPlayerData[1] = relativePosition.z / locationNormalizationFactor;
         otherPlayerData[2] = Vector3.Dot(obj.transform.forward, transform.forward);
         otherPlayerData[3] = Vector3.Dot(obj.transform.right, transform.right);
-        otherPlayerData[4] = (stats.score * 1.0f) / _manager.WinningScore;
+        otherPlayerData[4] = ((float)stats.score) / (float)_manager.WinningScore;
         otherPlayerData[5] = (stats.isStunned ? 1f : 0f);
         otherPlayerData[6] = (stats.isShooting ? 1f : 0f);
         return otherPlayerData;
@@ -52,9 +56,10 @@ public class RootAgent : Agent
                 otherPlayerBuffer.AppendObservation(GetOtherPlayerData(otherPlayer));
             }
         }
-        Vector3 relativePosition = _manager.transform.InverseTransformPoint(transform.position);
-        sensor.AddObservation(relativePosition.x);
-        sensor.AddObservation(relativePosition.z);
+
+        Vector3 relativePosition = _manager.transform.InverseTransformPoint(transform.position) - new Vector3(_manager.arena.ArenaGridBorderLength, 0.0f, _manager.arena.ArenaGridBorderWidth);
+        sensor.AddObservation(relativePosition.x / locationNormalizationFactor);
+        sensor.AddObservation(relativePosition.z / locationNormalizationFactor);
 
         Player.PlayerInfo stats = GetPlayerStats();
         sensor.AddObservation(stats.isStunned);

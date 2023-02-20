@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
 
     private Actions _actions;
     private PlayerCollector _collector;
-    private GameManager _manager;
+    [SerializeField] private GameManager _manager;
+    public GameManager GetManager { get { return _manager; } }
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
     private Mesh _skinnedMesh;
 
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour
     {
         _actions = GetComponent<Actions>();
         _collector = GetComponent<PlayerCollector>();
-        _manager = FindObjectOfType<GameManager>(true);
     }
 
     void FixedUpdate()
