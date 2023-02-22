@@ -9,6 +9,7 @@ using Unity.MLAgents.Actuators;
 
 public class RootAgent : Agent
 {
+    [SerializeField] public bool UsePlayerInput = false;
     [SerializeField] private TrainingManager _manager;
     private Player _player;
     private Actions _actions;
@@ -60,6 +61,8 @@ public class RootAgent : Agent
         Vector3 relativePosition = _manager.transform.InverseTransformPoint(transform.position) - new Vector3(_manager.arena.ArenaGridBorderLength, 0.0f, _manager.arena.ArenaGridBorderWidth);
         sensor.AddObservation(relativePosition.x / locationNormalizationFactor);
         sensor.AddObservation(relativePosition.z / locationNormalizationFactor);
+        sensor.AddObservation(transform.forward.x);
+        sensor.AddObservation(transform.forward.z);
 
         Player.PlayerInfo stats = GetPlayerStats();
         sensor.AddObservation(stats.isStunned);
@@ -71,6 +74,8 @@ public class RootAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        if (UsePlayerInput) return;
+
         var continuousActions = actionBuffers.ContinuousActions;
         var discreteActions = actionBuffers.DiscreteActions;
 

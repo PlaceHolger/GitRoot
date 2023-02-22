@@ -206,7 +206,7 @@ MonoBehaviour:
   scoreBoardsUI: []
   controlsUI: []
   playerNameUI: []
-  MaxEnvironmentSteps: 25000
+  MaxEnvironmentSteps: 15000
 --- !u!1001 &6983708364740173595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,6 +219,11 @@ PrefabInstance:
       propertyPath: m_AgentGameObject
       value: 
       objectReference: {fileID: 6659395505126277909}
+    - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
+        type: 3}
+      propertyPath: MaxStep
+      value: 15000
+      objectReference: {fileID: 0}
     - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
         type: 3}
       propertyPath: _manager
@@ -384,6 +389,11 @@ PrefabInstance:
       propertyPath: m_AgentGameObject
       value: 
       objectReference: {fileID: 6659395504950932065}
+    - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
+        type: 3}
+      propertyPath: MaxStep
+      value: 15000
+      objectReference: {fileID: 0}
     - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
         type: 3}
       propertyPath: _manager
@@ -554,6 +564,11 @@ PrefabInstance:
       propertyPath: m_AgentGameObject
       value: 
       objectReference: {fileID: 6659395504980394303}
+    - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
+        type: 3}
+      propertyPath: MaxStep
+      value: 15000
+      objectReference: {fileID: 0}
     - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
         type: 3}
       propertyPath: _manager
@@ -887,6 +902,11 @@ PrefabInstance:
       propertyPath: m_AgentGameObject
       value: 
       objectReference: {fileID: 6659395504035843134}
+    - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
+        type: 3}
+      propertyPath: MaxStep
+      value: 15000
+      objectReference: {fileID: 0}
     - target: {fileID: 63153335195137976, guid: df2c07d7db6f73948adb39e8fd8d727c,
         type: 3}
       propertyPath: _manager

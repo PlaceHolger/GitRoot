@@ -68,12 +68,11 @@ public class RootCreator : MonoBehaviour
         int currentLength = 0;
 
         ownCollider.enabled = false;
-        int hitCount = Physics.OverlapBoxNonAlloc(currentRootPos + startForward, Vector3.one * 0.5f, collisionResults, startRot, enableAttackLayerMask, QueryTriggerInteraction.Collide);
+        int hitCount = Physics.OverlapBoxNonAlloc(currentRootPos + startForward, Vector3.one * 0.45f, collisionResults, startRot, enableAttackLayerMask, QueryTriggerInteraction.Collide);
         ownCollider.enabled = true;
 
         if (hitCount > 0) //something attackable is currently in front of us, instead of shoot, we do an attack
         {
-            //Debug.Log("Hack-attack!");
             for (int j = 0; j < hitCount; j++)
             {
                 if (collisionResults[j].transform.parent)
@@ -81,14 +80,20 @@ public class RootCreator : MonoBehaviour
                     var rootComp = collisionResults[j].transform.parent.GetComponent<Root>();
                     if (rootComp)
                         rootComp.OnAttack();
+                    var playerComp = collisionResults[j].transform.GetComponent<Player>();
+                    if (playerComp)
+                    {
+                        playerComp.OnHit();
+                    }
                 }
                 else
                 {
                     var playerComp = collisionResults[j].transform.GetComponent<Player>();
                     if (playerComp)
+                    {
                         playerComp.OnHit();
+                    }
                 }
-
             }
             EventAttackStart.Invoke();
             return;
@@ -135,7 +140,6 @@ public class RootCreator : MonoBehaviour
                         var playerComp = collisionResults[j].transform.GetComponent<Player>();
                         if (playerComp)
                             playerComp.OnHit();
-                        Debug.Log("A Player was hit");
                     }
                 }
                 isShooting = notOurselfHitCounter == 0;
