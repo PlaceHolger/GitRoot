@@ -110,6 +110,7 @@ public class RootCreator : MonoBehaviour
 
         EventStartRooting.Invoke();
         var rootParent = new GameObject("RootShoot");
+        rootParent.transform.parent = transform.parent;
         while (currentLength < maxLength && isShooting)
         {
             currentLength++;

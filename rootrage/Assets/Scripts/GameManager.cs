@@ -165,10 +165,16 @@ public class GameManager : MonoBehaviour
         currentHighestScore = 0;
         OnPlayerCloseToWinningNotEvent.Invoke();
 
-        Root[] roots = transform.parent.GetComponentsInChildren<Root>();
+        /*Root[] roots = transform.parent.GetComponentsInChildren<Root>();
         foreach (Root root in roots)
         {
             Destroy(root.gameObject);
+        }*/
+
+        var rootShoot = transform.parent.transform.Find("RootShoot");
+        foreach (Transform child in transform.parent.transform)
+        {
+            if (child.name == "RootShoot") Destroy(child.gameObject);
         }
 
         Collectable[] others = transform.parent.GetComponentsInChildren<Collectable>();
