@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/RootShootRangeMultiplayer.unity
+    guid: 53cefd6fd6aa67048a1cf3196ecd7e3e
+  - enabled: 0
+    path: Assets/Scenes/RootShootRange.unity
+    guid: 7a9bc472ad06d0f4787a74336fd6bb0c
+  m_configObjects:
+    io.coherence.simulator.build.options: {fileID: 11400000, guid: 3259c9986dd9f7940ae1f7ad59d6e873,
+      type: 2}
