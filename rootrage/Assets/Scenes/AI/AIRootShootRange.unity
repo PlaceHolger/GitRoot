@@ -919,7 +919,12 @@ PrefabInstance:
     - target: {fileID: 6920696024876903049, guid: 2b0c6b34e43af8b4198415ef2e206777,
         type: 3}
       propertyPath: UsePlayerInput
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920696025022523555, guid: 2b0c6b34e43af8b4198415ef2e206777,
+        type: 3}
+      propertyPath: IgnoreOtherPlayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6983708364092972721, guid: 2b0c6b34e43af8b4198415ef2e206777,
         type: 3}

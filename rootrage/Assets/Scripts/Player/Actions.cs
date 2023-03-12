@@ -38,11 +38,19 @@ public class Actions : MonoBehaviour
     private bool _isShooting = false;
     public bool IsShooting { get { return _isShooting; } }
     private bool _isStunned = false;
+    private float _stunnedSince = 0.0f;
 
     public bool IsStunned
     {
         get => _isStunned;
-        set => _isStunned = value;
+        set
+        {
+            if (!_isStunned && value)
+            {
+                _stunnedSince = 0.0f;
+            }
+            _isStunned = value;
+        }
     }
 
     private void Awake()
@@ -57,6 +65,16 @@ public class Actions : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (_isStunned)
+        {
+            _stunnedSince += Time.deltaTime;
+            if (_stunnedSince > 2.0f)
+            {
+                _isStunned = false;
+                _stunnedSince = 0.0f;
+            }
+        }
         Vector3 velocity = _rigidbody.velocity;
 
         VerticalMovement(velocity);
@@ -75,7 +93,7 @@ public class Actions : MonoBehaviour
         Vector3 lerpedInputVector = Vector3.Lerp(_previousInputVector, new Vector3(-MoveInput.z, MoveInput.y, MoveInput.x), Time.deltaTime * inputAcceleration);
         float lerpedMagnitude = lerpedInputVector.magnitude;
 
-        _currentSpeed = (_isShooting || _isStunned) ? 0 : movementSpeed;
+        _currentSpeed = (_isShooting || _isStunned) ? 0.0f : movementSpeed;
         _horizontalVelocity = lerpedInputVector * _currentSpeed;
 
         // Caching for next frame
@@ -174,5 +192,6 @@ public class Actions : MonoBehaviour
     public void Reset()
     {
         InterruptShoot();
+        _isShooting = false;
     }
 }

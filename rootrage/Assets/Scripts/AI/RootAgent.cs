@@ -10,7 +10,7 @@ using Unity.MLAgents.Actuators;
 public class RootAgent : Agent
 {
     [SerializeField] public bool UsePlayerInput = false;
-    [SerializeField] private TrainingManager _manager;
+    [SerializeField] private GameManager _manager;
     private Player _player;
     private Actions _actions;
     private BufferSensorComponent otherPlayerBuffer;

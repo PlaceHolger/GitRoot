@@ -165,12 +165,6 @@ public class GameManager : MonoBehaviour
         currentHighestScore = 0;
         OnPlayerCloseToWinningNotEvent.Invoke();
 
-        /*Root[] roots = transform.parent.GetComponentsInChildren<Root>();
-        foreach (Root root in roots)
-        {
-            Destroy(root.gameObject);
-        }*/
-
         var rootShoot = transform.parent.transform.Find("RootShoot");
         foreach (Transform child in transform.parent.transform)
         {
@@ -233,8 +227,8 @@ public class GameManager : MonoBehaviour
             Vector2 circlePos = Random.insideUnitCircle.normalized * 3.0f;
             Vector3 spawnPos = new Vector3(circlePos.x + position.x, position.y, circlePos.y + position.z);
             Collider[] collisionResults = new Collider[16]; // can this be solved better?
-            int hitCount = Physics.OverlapBoxNonAlloc(spawnPos, Vector3.one * 1.0f, collisionResults, transform.rotation, obstacleLayermask, QueryTriggerInteraction.Ignore);
-            if (hitCount > -1)
+            int hitCount = Physics.OverlapBoxNonAlloc(spawnPos, Vector3.one * 0.45f, collisionResults, transform.rotation, obstacleLayermask, QueryTriggerInteraction.Ignore);
+            if (hitCount <= 0)
             {
                 Instantiate(collectable, spawnPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), gameObject.transform);
                 break;
@@ -245,5 +239,17 @@ public class GameManager : MonoBehaviour
     protected void StartGame()
     {
         started = true;
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (!players[i].gameObject.activeSelf)
+            {
+                var ailogic = players[i].transform.Find("AILogic");
+                if (ailogic)
+                {
+                    players[i].gameObject.SetActive(true);
+                    ailogic.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }

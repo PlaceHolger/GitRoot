@@ -39,10 +39,14 @@ public class Player : MonoBehaviour
 
     public void OnHit()
     {
-        if (!_actions.IsStunned && _collector.CurrentScore > 0)
+        if (!_actions.IsStunned)
         {
-            _collector.CurrentScore = _collector.CurrentScore - 1;
-            _manager.DropCollectables(transform.position);
+            _actions.IsStunned = true;
+            if (_collector.CurrentScore > 0)
+            {
+                _collector.CurrentScore = _collector.CurrentScore - 1;
+                _manager.DropCollectables(transform.position);
+            }
         }
 
         _actions.InterruptShoot();

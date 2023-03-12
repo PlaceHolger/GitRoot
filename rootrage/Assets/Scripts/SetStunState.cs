@@ -7,9 +7,9 @@ public class SetStunState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var actionsComp = animator.GetComponentInParent<Actions>();
+        /*var actionsComp = animator.GetComponentInParent<Actions>();
         if (actionsComp)
-            actionsComp.IsStunned = true;
+            actionsComp.IsStunned = true;*/
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,9 +21,9 @@ public class SetStunState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var actionsComp = animator.GetComponentInParent<Actions>();
+        /*var actionsComp = animator.GetComponentInParent<Actions>();
         if (actionsComp)
-            actionsComp.IsStunned = false;
+            actionsComp.IsStunned = false;*/
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -16,6 +16,27 @@ public class PlayerJoinManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var ailogic = player1.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
+        ailogic = player2.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
+        ailogic = player3.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
+        ailogic = player4.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
+
         player1.SetActive(false);
         player2.SetActive(false);
         player3.SetActive(false);
@@ -48,24 +69,44 @@ public class PlayerJoinManager : MonoBehaviour
     private void P1Joined(InputAction.CallbackContext obj)
     {
         player1.SetActive(true);
+        var ailogic = player1.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
         JoinP1Action.action.performed -= P1Joined;
     }
 
     private void P2Joined(InputAction.CallbackContext obj)
     {
         player2.SetActive(true);
+        var ailogic = player2.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
         JoinP2Action.action.performed -= P2Joined;
     }
 
     private void P3Joined(InputAction.CallbackContext obj)
     {
         player3.SetActive(true);
+        var ailogic = player3.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
         JoinP3Action.action.performed -= P3Joined;
     }
 
     private void P4Joined(InputAction.CallbackContext obj)
     {
         player4.SetActive(true);
+        var ailogic = player4.transform.Find("AILogic");
+        if (ailogic)
+        {
+            ailogic.gameObject.SetActive(false);
+        }
         JoinP4Action.action.performed -= P4Joined;
     }
 }
